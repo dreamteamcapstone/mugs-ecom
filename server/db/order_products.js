@@ -54,9 +54,37 @@ async function getAllOrderProductsByOrder(id) {
       }
 }
 
+async function attachOrderProductsToOrder(orders) {
+    const ordersToReturn = [...orders]; 
+
+    const position = orders.map((_, index) => `$${index + 1}`).join(', ');
+    const orderIds = orders.map((order) => order.id);
+  
+    const { rows: orderProducts } = await client.query(
+      `
+    SELECT products.*, order_products.quantity, order_products.purchasePrice, order_products."orderId", order_products.id AS "orderProductId"
+    FROM products
+    JOIN order_products ON order_products."productId" = products.id
+    WHERE order_products."orderId" IN (${position});
+    `,
+      orderIds
+    );
+  
+    for (const order of ordersToReturn) {
+      const productsToAdd = orderProducts.filter(
+        (orderProduct) => orderProduct.orderId === order.id
+      );
+  
+      order.products = productsToAdd;
+    }
+  
+    return ordersToReturn;
+  }
+
 module.exports = {
     addOrderProduct,
     updateOrderProduct,
     destroyOrderProduct,
-    getAllOrderProductsByOrder
+    getAllOrderProductsByOrder,
+    attachOrderProductsToOrder
 };

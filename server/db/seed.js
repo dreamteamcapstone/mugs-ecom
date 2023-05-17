@@ -5,6 +5,7 @@ const {
   getOrdersWithoutProducts,
   getAllProducts,
   addOrderProduct,
+  attachOrderProductsToOrder,
 } = require('./')
 const client = require('./client');
 
@@ -186,11 +187,19 @@ const createInitialOrderProducts = async () => {
       purchasePrice: recycleMug.price,
     },
   ];
+
   const orderProducts = await Promise.all(
     orderProductsToCreate.map(addOrderProduct))
     console.log("Order_products created:", orderProducts)
     console.log("Finished adding/creating order_products")
 }
+
+// const testOrders = async () => {
+//   await createInitialOrders()
+// }
+
+// const orders = testOrders()
+
 const rebuildDB = async () => {
   try {
     await dropTables();
@@ -199,6 +208,9 @@ const rebuildDB = async () => {
     await createInitialProducts();
     await createInitialOrders();
     await createInitialOrderProducts();
+    // console.log("testing attach function")
+    // console.log(await attachOrderProductsToOrder(orders))
+    // console.log("finished testing attach function")
   } catch (error) {
     console.error('Error during rebuildDB', error);
     throw error;
