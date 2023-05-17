@@ -4,7 +4,7 @@ const {
   createOrder,
   getOrdersWithoutProducts,
   getAllProducts,
-  addProductToOrder,
+  addOrderProduct,
 } = require('./')
 const client = require('./client');
 
@@ -185,9 +185,9 @@ const createInitialOrderProducts = async () => {
       quantity: 2,
       purchasePrice: recycleMug.price,
     },
-  ]
+  ];
   const orderProducts = await Promise.all(
-    orderProductsToCreate.map(addProductToOrder))
+    orderProductsToCreate.map(addOrderProduct))
     console.log("Order_products created:", orderProducts)
     console.log("Finished adding/creating order_products")
 }
