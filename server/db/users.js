@@ -7,10 +7,12 @@ async function hashedPassword({password}) {
   const hash = await bcrypt.hash(password, saltRounds);
   return hash;
 }
+
 async function checkPassword(password, hash) {
   const compare = await bcrypt.compare(password, hash)
   return compare;
 }
+
 async function createUser({email, password, address, phoneNumber}) {
   try {
     const newPassword = await hashedPassword({password});
@@ -28,15 +30,54 @@ async function createUser({email, password, address, phoneNumber}) {
   }
 }
 
-async function getUser() {}
+async function getUser({ email, password }) {
+  try {
+    if(!email || !password) {
+      return;
+    }
+    const { rows: [user]} = await client.query(`
+      SELECT * FROM users
+      WHERE email = $1;
+    `, [email]);
+    const match = await checkPassword(password, user.password);
+    if(!match) {
+      return null;
+    }
+    delete user.password;
+    return user;
+  } catch (error) {
+    throw error;
+  }
+};
 
-async function getUserById() {}
+async function getUserById(userId) {
+  try {
+    const { rows: [user] } = await client.query(`
+      SELECT * FROM users
+      WHERE id = $1;
+    `, [userId]);
+    delete user.password;
+    return user;
+  } catch (error) {
+    throw user;
+  }
+};
 
-async function getUserByUsername() {}
+async function getUserByEmail(email) {
+  try {
+    const {rows: [user]} = await client.query(`
+      SELECT * FROM users
+      WHERE email = $1
+    `, [email]);
+    return user;
+  } catch (error) {
+    throw error;
+  }
+};
 
 module.exports = {
   createUser,
   getUser,
   getUserById,
-  getUserByUsername,
+  getUserByEmail,
 };

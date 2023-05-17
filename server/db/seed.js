@@ -156,13 +156,13 @@ const createInitialOrderProducts = async () => {
       purchasePrice: reactMug.price,
     },
     {
-      orderId: order1.id,
+      orderId: order2.id,
       productId: floralMug.id,
       quantity: 1,
       purchasePrice: floralMug.price,
     },
     {
-      orderId: order2.id,
+      orderId: order3.id,
       productId: chicMug.id,
       quantity: 2,
       purchasePrice: chicMug.price,
