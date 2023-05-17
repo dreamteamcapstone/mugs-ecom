@@ -4,12 +4,6 @@ const {
   createOrder,
   getOrdersWithoutProducts,
   getAllProducts,
-  addProductToOrder,
-
-  getOrderById,
-  updateOrder,
-  deleteOrder,
-  getAllOrdersByUser
 } = require('./')
 const client = require('./client');
 
@@ -161,13 +155,13 @@ const createInitialOrderProducts = async () => {
       purchasePrice: reactMug.price,
     },
     {
-      orderId: order1.id,
+      orderId: order2.id,
       productId: floralMug.id,
       quantity: 1,
       purchasePrice: floralMug.price,
     },
     {
-      orderId: order2.id,
+      orderId: order3.id,
       productId: chicMug.id,
       quantity: 2,
       purchasePrice: chicMug.price,
@@ -190,12 +184,20 @@ const createInitialOrderProducts = async () => {
       quantity: 2,
       purchasePrice: recycleMug.price,
     },
-  ]
+  ];
+
   const orderProducts = await Promise.all(
-    orderProductsToCreate.map(addProductToOrder))
+    orderProductsToCreate.map(addOrderProduct))
     console.log("Order_products created:", orderProducts)
     console.log("Finished adding/creating order_products")
 }
+
+// const testOrders = async () => {
+//   await createInitialOrders()
+// }
+
+// const orders = testOrders()
+
 const rebuildDB = async () => {
   try {
     await dropTables();
@@ -204,9 +206,6 @@ const rebuildDB = async () => {
     await createInitialProducts();
     await createInitialOrders();
     await createInitialOrderProducts();
-    console.log('This is get Order by Id -------->',await getOrderById(2));
-    console.log('This is get Order by user -------->',await getAllOrdersByUser('hello@gmail.com'))
-
   } catch (error) {
     console.error('Error during rebuildDB', error);
     throw error;
