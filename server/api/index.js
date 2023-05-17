@@ -1,6 +1,6 @@
-const client = require('../db/client');
 const express = require("express");
-const router = require('express').Router();
+const router = express.Router();
+// const client = require('../db/client');
 
 router.get('/health', async (req, res, next) => {
   try {
