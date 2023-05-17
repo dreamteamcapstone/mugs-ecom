@@ -1,5 +1,5 @@
 const client = require('../db/client');
-
+const express = require("express");
 const router = require('express').Router();
 
 router.get('/health', async (req, res, next) => {
@@ -28,8 +28,24 @@ router.get('/health', async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
+}); 
 
-router.use('/users', require('./users'));
+
+// ROUTER: /api/users
+const usersRouter = require('./users');
+router.use('/users', usersRouter);
+
+// ROUTER: /api/orders
+const ordersRouter = require('./orders');
+router.use('/orders', ordersRouter);
+
+// ROUTER: /api/order_products
+const orderProductsRouter = require('./order_products');
+router.use('/order_products', orderProductsRouter);
+
+// ROUTER: /api/products
+const productsRouter = require('./products');
+router.use('/products', productsRouter);
+
 
 module.exports = router;

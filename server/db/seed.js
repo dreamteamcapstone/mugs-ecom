@@ -5,6 +5,11 @@ const {
   getOrdersWithoutProducts,
   getAllProducts,
   addProductToOrder,
+
+  getOrderById,
+  updateOrder,
+  deleteOrder,
+  getAllOrdersByUser
 } = require('./')
 const client = require('./client');
 
@@ -199,6 +204,9 @@ const rebuildDB = async () => {
     await createInitialProducts();
     await createInitialOrders();
     await createInitialOrderProducts();
+    console.log('This is get Order by Id -------->',await getOrderById(2));
+    console.log('This is get Order by user -------->',await getAllOrdersByUser('hello@gmail.com'))
+
   } catch (error) {
     console.error('Error during rebuildDB', error);
     throw error;
