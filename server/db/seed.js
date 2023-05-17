@@ -4,8 +4,6 @@ const {
   createOrder,
   getOrdersWithoutProducts,
   getAllProducts,
-  addOrderProduct,
-  attachOrderProductsToOrder,
 } = require('./')
 const client = require('./client');
 
@@ -208,9 +206,6 @@ const rebuildDB = async () => {
     await createInitialProducts();
     await createInitialOrders();
     await createInitialOrderProducts();
-    // console.log("testing attach function")
-    // console.log(await attachOrderProductsToOrder(orders))
-    // console.log("finished testing attach function")
   } catch (error) {
     console.error('Error during rebuildDB', error);
     throw error;
