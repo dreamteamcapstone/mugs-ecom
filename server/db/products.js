@@ -38,6 +38,19 @@ const getProductById = async (id) => {
  }
 }
 
+const getProductByName = async (name) => {
+  try {
+    const { rows: [ product ] } = await client.query(`
+      SELECT * FROM products
+      WHERE name=$1
+    `, [name])
+
+    return product;
+  } catch (error) {
+    throw error;
+  }
+}
+
 const updateProduct = async ({id, ...fields}) => {
  try {
     const keys = Object.keys(fields);
@@ -80,4 +93,5 @@ module.exports = {
     getProductById,
     updateProduct,
     destroyProduct,
+    getProductByName
 };
