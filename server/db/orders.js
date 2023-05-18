@@ -1,4 +1,5 @@
 const client = require('./client');
+const {attachOrderProductsToOrder} = require("./order_products")
 
 const createOrder = async ({ userId, purchased }) => {
     try {
@@ -27,12 +28,12 @@ const getOrdersWithoutProducts = async () => {
 
 const getOrderById = async (id) => {
     try {
-        const { rows: order } = await client.query(`
+        const { rows: [order] } = await client.query(`
           SELECT * FROM orders
           WHERE id = $1;
         `, [id]);
     
-        return await attachOrderProductsToOrder(order);
+        return order;
       } catch (error) {
         console.error(error);
       }
@@ -40,14 +41,24 @@ const getOrderById = async (id) => {
 
 const getAllOrdersByUser = async (email) => {
     try {
+        let orders = await getAllOrders();
+        orders = orders.filter(order=> {return order.customerEmail === email});
+        console.log(orders[0].products[0])
+        return orders;
+        
+    } catch (error) {
+        throw error;
+    }
+}
+
+const getAllOrders = async () => {
+    try {
         const { rows: orders } = await client.query(
           `
-          Select orders.*, users.email AS "customerName"
+          Select orders.*, users.email AS "customerEmail"
           FROM orders
-          JOIN users ON users.id = orders."userId"
-          WHERE users.email = $1
-          `,
-          [email]
+          JOIN users ON orders."userId" = users.id
+          `
           );
     
           
@@ -56,6 +67,8 @@ const getAllOrdersByUser = async (email) => {
         throw error;
       }
 }
+
+
 
 const updateOrder = async ({id, ...fields}) => {
     const setString = Object.keys(fields).map(
@@ -104,5 +117,6 @@ module.exports = {
     getOrderById,
     updateOrder,
     deleteOrder,
-    getAllOrdersByUser
+    getAllOrdersByUser,
+    getAllOrders
 };
