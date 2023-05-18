@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env;
 
 
+
 router.get('/health', async (req, res, next) => {
   try {
     const uptime = process.uptime();
@@ -83,6 +84,8 @@ router.use('/order_products', orderProductsRouter);
 // ROUTER: /api/products
 const productsRouter = require('./products');
 router.use('/products', productsRouter);
+
+
 
 
 module.exports = router;
