@@ -9,7 +9,6 @@ const {
   getAllOrdersByUser,
   getAllOrders,
   getAllOrderProductsByOrder,
-  getMaxListeners
 } = require('./')
 const client = require('./client');
 
@@ -45,7 +44,8 @@ const createTables = async () => {
       description TEXT NOT NULL,
       name VARCHAR(255) UNIQUE NOT NULL,
       imageUrl TEXT NOT NULL,
-      price MONEY NOT NULL
+      price MONEY NOT NULL,
+      inventory INTEGER NOT NULL
     );
     CREATE TABLE orders(
       id SERIAL PRIMARY KEY,
@@ -93,12 +93,12 @@ const createInitialProducts = async () => {
     console.log("Starting to create Products")
 
     const productsToCreate = [
-      {name: "React Mug", description: "UseEffect(Caffeine)!!", imageUrl: "https://cdn.shopify.com/s/files/1/0528/4148/0360/products/white-ceramic-mug-with-color-inside-blue-11oz-right-602ed35606e69.jpg?v=1613681500&width=713", price: 10.00},
-      {name: "Floral Mug", description: "Floral Design with Golden Accent Handle #BOUJEE" , imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFLOxqspaPRlUQVLIzWDH74Qz0KNIKq9X7ZA&usqp=CAU", price: 15.00, },
-      {name: "Debug Mug", description: "Step-by-step guide to debugging", imageUrl: "https://m.media-amazon.com/images/I/71kh9zvQZ-L._AC_SX569_.jpg" , price: 10.00 },
-      {name: "Marauders Map Mug", description: "Color changes Marauders Map when Hot liquid is added!", imageUrl: "https://ae01.alicdn.com/kf/HTB1TrH4MXXXXXczXpXXq6xXFXXXY/color-changing-Light-Magic-mugs-Marauders-Map-mug-Mischief-Managed-mug-Platform-9-and-3-4.jpg", price: 15.00, },
-      {name: "Recycle Mug", description: "Sip from a recycling can...mmm", imageUrl: "https://m.media-amazon.com/images/I/81leExBx1rL.__AC_SX300_SY300_QL70_FMwebp_.jpg", price: 14.00, },
-      {name: "Chic Mug", description: "A cute baby chicken!" , imageUrl: "https://m.media-amazon.com/images/I/31zOVVHJClL.jpg", price: 12.50, },
+      {name: "React Mug", description: "UseEffect(Caffeine)!!", imageUrl: "https://cdn.shopify.com/s/files/1/0528/4148/0360/products/white-ceramic-mug-with-color-inside-blue-11oz-right-602ed35606e69.jpg?v=1613681500&width=713", price: 10.00, inventory: 20},
+      {name: "Floral Mug", description: "Floral Design with Golden Accent Handle #BOUJEE" , imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFLOxqspaPRlUQVLIzWDH74Qz0KNIKq9X7ZA&usqp=CAU", price: 15.00, inventory: 20},
+      {name: "Debug Mug", description: "Step-by-step guide to debugging", imageUrl: "https://m.media-amazon.com/images/I/71kh9zvQZ-L._AC_SX569_.jpg" , price: 10.00, inventory: 20 },
+      {name: "Marauders Map Mug", description: "Color changes Marauders Map when Hot liquid is added!", imageUrl: "https://ae01.alicdn.com/kf/HTB1TrH4MXXXXXczXpXXq6xXFXXXY/color-changing-Light-Magic-mugs-Marauders-Map-mug-Mischief-Managed-mug-Platform-9-and-3-4.jpg", price: 15.00, inventory: 20},
+      {name: "Recycle Mug", description: "Sip from a recycling can...mmm", imageUrl: "https://m.media-amazon.com/images/I/81leExBx1rL.__AC_SX300_SY300_QL70_FMwebp_.jpg", price: 14.00, inventory: 20},
+      {name: "Chic Mug", description: "A cute baby chicken!" , imageUrl: "https://m.media-amazon.com/images/I/31zOVVHJClL.jpg", price: 12.50, inventory: 20},
     ]
 
     const products = await Promise.all(productsToCreate.map(createProduct))

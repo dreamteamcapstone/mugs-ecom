@@ -85,7 +85,7 @@ const updateOrder = async ({id, ...fields}) => {
         return order;
       } catch (error) {
         console.error(error);
-}
+    }
 }
 const deleteOrder = async (id) => {
     try {
