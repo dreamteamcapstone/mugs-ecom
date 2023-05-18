@@ -1,6 +1,11 @@
+
 const client = require('../db/client');
-const express = require("express");
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
+const { getUserById } = require('../db');
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET } = process.env;
+
 
 router.get('/health', async (req, res, next) => {
   try {
@@ -13,7 +18,7 @@ router.get('/health', async (req, res, next) => {
     const currentTime = new Date();
 
     const lastRestart = new Intl.DateTimeFormat('en', {
-      timestyle: 'long',
+      timeStyle: 'long',
       dateStyle: 'long',
       timeZone: 'America/New_York',
     }).format(currentTime - uptime * 1000);
@@ -29,6 +34,38 @@ router.get('/health', async (req, res, next) => {
     next(error);
   }
 }); 
+
+//Auth Middleware
+router.use(async (req, res, next) => {
+  const prefix = 'Bearer ';
+  const auth = req.header('Authorization');
+
+  if (!auth) {
+      next();
+  } else if (auth.startsWith(prefix)) {
+      const token = auth.slice(prefix.length);
+  
+    try {
+       const { id } = jwt.verify(token, JWT_SECRET);
+
+       if (id) {
+          const user = await getUserById(id);
+          if(user){
+            req.user = user
+          }
+          
+          next();
+        }
+    } catch (error) {
+          next(error);
+    }
+  } else {
+      next({
+          name: 'AuthorizationError',
+          message: `Authorization token must start with ${ prefix }`
+        });
+  }
+});
 
 
 // ROUTER: /api/users
