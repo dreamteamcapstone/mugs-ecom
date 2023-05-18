@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { getAllProducts } = require("../db");
 
+
 router.get('/', async (req, res, next) => {
     try {
        const allProducts = await getAllProducts()
@@ -17,4 +18,6 @@ router.get('/', async (req, res, next) => {
 
 
 
+
 module.exports = router;
+

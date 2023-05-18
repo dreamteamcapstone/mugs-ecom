@@ -4,4 +4,17 @@ const router = express.Router();
 
 
 
+// GET /api/orders
+
+// POST /api/orders
+
+// PATCH /api/orders/:orderId
+
+// DELETE /api/orders/:orderId
+
+// POST /api/orders/:orderId/products
+
+
 module.exports = router;
+
+
