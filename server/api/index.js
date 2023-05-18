@@ -1,6 +1,6 @@
-const client = require('../db/client');
+//const client = require('../db/client');
 const express = require("express");
-const router = require('express').Router();
+const router = express.Router();
 
 router.get('/health', async (req, res, next) => {
   try {
@@ -46,6 +46,8 @@ router.use('/order_products', orderProductsRouter);
 // ROUTER: /api/products
 const productsRouter = require('./products');
 router.use('/products', productsRouter);
+
+
 
 
 module.exports = router;
