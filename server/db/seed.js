@@ -4,6 +4,7 @@ const {
   createOrder,
   getOrdersWithoutProducts,
   getAllProducts,
+  addOrderProduct,
 } = require('./')
 const client = require('./client');
 
