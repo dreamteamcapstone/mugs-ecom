@@ -1,9 +1,11 @@
+
 const client = require('../db/client');
 const express = require('express');
 const router = express.Router();
 const { getUserById } = require('../db');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env;
+
 
 router.get('/health', async (req, res, next) => {
   try {
