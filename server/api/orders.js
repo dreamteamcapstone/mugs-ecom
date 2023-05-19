@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const {createOrder, getAllOrders, getOrderById, updateOrder, deleteOrder, getAllOrderProductsByOrder, addOrderProduct} = require("../db");
-
+const {createOrder, getAllOrders, getOrderById, updateOrder, deleteOrder, getAllOrderProductsByOrder, updateOrderProduct, addOrderProduct} = require("../db");
+const { requireUser } = require('./utils')
 
 // GET /api/orders
-router.get('/', async (req, res, next) => {
+router.get('/', requireUser, async (req, res, next) => {
     try {
       const orders = await getAllOrders();
       res.json(orders);
@@ -26,8 +26,8 @@ router.post('/', async (req, res, next) => {
       }
   });
 
-// PUT /api/orders/:orderId
-router.put('/:orderId', async (req, res, next) => {
+// PATCH /api/orders/:orderId
+router.patch('/:orderId', async (req, res, next) => {
     try {
         const { orderId } = req.params;
         const { userId, purchased } = req.body;
@@ -66,28 +66,42 @@ router.delete('/:orderId', async (req, res, next) => {
   });
 
 // POST /api/orders/:orderId/products
-// router.post('/:orderId/products', async (req, res, next) => {
-//     try {
-//         const { orderId } = req.params;
-//         const { productId, quantity, purchasePrice } = req.body;
+router.post('/:orderId/products', async (req, res, next) => {
+    try {
+        const { orderId } = req.params;
+        const { productId, quantity, purchasePrice } = req.body;
     
-//         const orderProduct = await addOrderProduct({ orderId, productId, quantity, purchasePrice });
-//         const orderProducts = await getAllOrderProductsByOrder(orderId);
-
-//         res.json(orderProducts);
-//       } catch (error) {
-//         next(error);
-//       }
-//   });
+        const orderProducts = await getAllOrderProductsByOrder(orderId);
+        let productExistsInCart = false;
+        for (let i=0; i < orderProducts.length; i++) {
+            const productRow = orderProducts[i];
+            if (productRow.productId === productId) {
+                productExistsInCart = true;
+                const addQuantity = await updateOrderProduct({id: productId, quantity: quantity++ })
+                res.send(addQuantity);
+            } 
+            
+            if (!productExistsInCart) {
+                const product = await addOrderProduct({
+                    orderId, 
+                    productId, 
+                    quantity, 
+                    purchasePrice
+                })
+                res.send(product);
+            }
+        }
+      } catch (error) {
+        next(error);
+      }
+  });
 
 //GET /api/orders/:orderId/products
   router.get('/orders/:orderId/products', async (req, res, next) => {
     try {
       const { orderId } = req.params;
   
-      const orderProducts = await getAllOrderProductsByOrder(orderId);
-  
-
+      const orderProducts = await getAllOrderProductsByOrder(orderId)
       res.json(orderProducts);
     } catch (error) {
       next(error);

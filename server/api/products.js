@@ -108,16 +108,7 @@ router.patch('/:productId', requireUser, async (req, res, next) => {
             name: "Error Finding Product",
             message: "Unable to find a product by that Id"
         });
-    
-       }else {
-          const productExists = await getProductByName(name);
-
-          if (productExists) {
-            next({
-              name: "Product Exists Error",
-              message:"This product already exists"
-            });
-          } else {
+        }
             const updatedProduct = await updateProduct({ 
                 id: productId, 
                 description,
@@ -126,12 +117,7 @@ router.patch('/:productId', requireUser, async (req, res, next) => {
                 price,
                 inventory
             });
-
-            res.send(
-                updatedProduct
-            )
-          }
-       }
+            res.send(updatedProduct)
      } catch (error) {
         next(error)
      }
