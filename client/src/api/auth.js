@@ -1,4 +1,4 @@
-const BASE_URL = `http://localhost.com:8080/api`
+// const BASE_URL = `http://localhost:8080/api`
 
 export const authenticateUser = async ({email, password}) => {
     try {
@@ -12,7 +12,7 @@ export const authenticateUser = async ({email, password}) => {
     // console.log("RESPONSE", response)
     
         const result = await response.json();
-        console.log("authenticat user result", result);
+        console.log("authenticate user result", result);
         const {user, message, token}  = result;
         if(token) {
           localStorage.setItem('token', token);

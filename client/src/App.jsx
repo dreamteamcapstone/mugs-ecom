@@ -6,14 +6,14 @@ import reactLogo from './assets/react.svg'
 // } from "../components/";
 import './App.css'
 import { Route, Routes } from 'react-router-dom';
-import { Login, Register } from './components';
+import { Login, Register, Profile } from './components';
 
 function App() {
   const [products, setProducts] = useState([]);
   const [user, setUser] = useState({});
   const [token, setToken] = useState(localStorage.token);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+
   // useEffect(() => {
   //   const getData = async () => {
   //     const fetchedProducts = await fetchProducts();
@@ -33,6 +33,7 @@ function App() {
       <Routes>
         <Route path='/login' element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}></Route>
         <Route path='/register' element={<Register setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}></Route>
+        <Route path='/profile' element={<Profile token={token} user={user} isLoggedIn={isLoggedIn}/>}></Route>
       </Routes>
     </div>
   )

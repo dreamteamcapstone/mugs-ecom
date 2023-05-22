@@ -6,8 +6,6 @@ const { getUserById } = require('../db');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env;
 
-
-
 router.get('/health', async (req, res, next) => {
   try {
     const uptime = process.uptime();
@@ -67,7 +65,6 @@ router.use(async (req, res, next) => {
         });
   }
 });
-
 
 // ROUTER: /api/users
 const usersRouter = require('./users');

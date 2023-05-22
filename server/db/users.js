@@ -13,16 +13,16 @@ async function checkPassword(password, hash) {
   return compare;
 }
 
-async function createUser({email, password, address, phoneNumber}) {
+async function createUser({email, password, address, phoneNumber, admin}) {
   try {
     const newPassword = await hashedPassword({password});
 
     const { rows: [user] } = await client.query(`
-      INSERT INTO users(email, password, address, "phoneNumber")
-      VALUES ($1, $2, $3, $4) 
+      INSERT INTO users(email, password, address, "phoneNumber", admin)
+      VALUES ($1, $2, $3, $4, $5) 
       ON CONFLICT (email) DO NOTHING
-      RETURNING id, email, address, "phoneNumber";
-    `, [email, newPassword, address, phoneNumber])
+      RETURNING id, email, address, "phoneNumber", admin;
+    `, [email, newPassword, address, phoneNumber, admin])
     return user;
   } catch (error) {
     console.error("error in createUser", error)
