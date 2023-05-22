@@ -71,22 +71,23 @@ router.post('/:orderId/products', requireUser, async (req, res, next) => {
     try {
         const { orderId } = req.params;
         const { productId, quantity, purchasePrice } = req.body;
-    
+      console.log("addProduct")
         const orderProducts = await getAllOrderProductsByOrder(orderId);
-        let productExistsInCart = false;
-        for (let i=0; i < orderProducts.length; i++) {
-            const productRow = orderProducts[i];
-            if (productRow.productId === productId && 
-                productRow.purchasePrice === purchasePrice) {
-                productExistsInCart = true;
-                const updatedQuantity = quantity + productRow.quantity;
-                console.log(updatedQuantity);
-                const updatedPurchasePrice = purchasePrice * updatedQuantity;
-                const updatedOrderItem = await updateOrderProduct({productId, updatedQuantity, updatedPurchasePrice})
-                res.send(updatedOrderItem);
+        const product = orderProducts.find(orderProduct => orderProduct.productId === productId)
+            if (product) {
+                // const updatedQuantity = quantity + product.quantity;
+                // console.log(updatedQuantity);
+                // // const updatedPurchasePrice = Number(product.purchasePrice) * updatedQuantity;
+                // // console.log(updatedPurchasePrice)
+                // const updatedOrderItem = await updateOrderProduct({productId, updatedQuantity, purchasePrice})
+                // console.log(updatedOrderItem)
+                // res.send(updatedOrderItem);
+                next({
+                  name: "Order Product already exists in Order",
+                  message: "Order Product quantity will need to be updated from cart"
+                })
             } 
-            
-            if (!productExistsInCart) {
+            if (!product) {
                 const product = await addOrderProduct({
                     orderId, 
                     productId, 
@@ -95,7 +96,7 @@ router.post('/:orderId/products', requireUser, async (req, res, next) => {
                 })
                 res.send(product);
             }
-        }
+
       } catch (error) {
         next(error);
       }
