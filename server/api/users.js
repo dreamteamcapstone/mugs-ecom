@@ -24,9 +24,9 @@ router.post('/login', async (req, res, next) => {
   }
   try {
     const user = await getUser({email, password});
-    const token = jwt.sign(user, JWT_SECRET, { expiresIn: '2w' });
+    const token = jwt.sign({email: user.email, password: user.password}, process.env.JWT_SECRET, { expiresIn: '2w' });
 
-    res.send({ message: "Logged In!", token: token})
+    res.send({ user: user, message: "Logged In!", token: token})
   } catch(error){
     next(error);
   }
@@ -34,13 +34,13 @@ router.post('/login', async (req, res, next) => {
 
 
 router.post('/register', async (req, res, next) => {
+  const {email, password} = req.body;
   try {
-    const {email, password, address, phoneNumber, admin} = req.body;
 
-    if(password.length < 5) {
+    if(password.length < 8) {
       next({
         name: "Password Too Short",
-        message: "password must be at least 5 Characters long"
+        message: "password must be at least 8 Characters long"
       })
     }
     //password must be longer than 4 characters, at least 5.
@@ -55,14 +55,13 @@ router.post('/register', async (req, res, next) => {
 
         const user = await createUser({email, password, address, phoneNumber, admin});
 
-        const token = jwt.sign({id: user.id, email}, 
+        const token = jwt.sign({email: user.email, password: user.password}, 
             process.env.JWT_SECRET, { expiresIn: '1w' });
 
         res.send({
             message: "User has been registered & Logged In",
             token: token,
-            user: {email: user.email,
-            id: user.id}
+            user: user
         });
     }
   } catch (error) {

@@ -1,12 +1,10 @@
 
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-// import {
-//   //components go here
-// } from "../components/";
 import './App.css'
 import { Route, Routes } from 'react-router-dom';
 import { Login, Register, Profile } from './components';
+import { Login, Register } from './components';
+import { getMe } from './api/auth';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -14,18 +12,19 @@ function App() {
   const [token, setToken] = useState(localStorage.token);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const fetchedProducts = await fetchProducts();
-  //     setProducts(fetchedProducts);
-  //     if(token) {
-  //       const me = await getMe(token);
-  //       setUser(me);
-  //       setIsLoggedIn(true);
-  //     }
-  //   }
-  //   getData();
-  // }, [])
+  useEffect(() => {
+    const getData = async () => {
+      // const fetchedProducts = await fetchProducts();
+      // setProducts(fetchedProducts);
+      if(token) {
+        const me = await getMe(token);
+        console.log(me);  
+        setUser(me);
+        setIsLoggedIn(true);
+      }
+    }
+    getData();
+  }, [])
 
   return (
     <div className="App">
