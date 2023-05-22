@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-import {
-  //components go here
-} from "../components/";
+// import {
+//   //components go here
+// } from "../components/";
 import './App.css'
 
 function App() {

@@ -51,9 +51,11 @@ const getProductByName = async (name) => {
   }
 }
 
-const updateProduct = async ({id, ...fields}) => {
- try {
-    const keys = Object.keys(fields);
+const updateProduct = async (id, ...fields) => {
+    console.log(fields);
+    const [ inputs ] = fields
+try {
+    const keys = Object.keys(inputs);
 
     const setString = keys.map((key, index) => `"${key}"=$${index + 1}`)
       .join(', ');
@@ -64,7 +66,7 @@ const updateProduct = async ({id, ...fields}) => {
           SET ${ setString }
           WHERE id=${id}
           RETURNING *;
-         `, Object.values(fields)
+         `, Object.values(inputs)
          );
 
       return product;

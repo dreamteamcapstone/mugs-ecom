@@ -14,14 +14,14 @@ async function addOrderProduct({orderId, productId, quantity, purchasePrice}) {
     }
 }
 
-async function updateOrderProduct({id, quantity}) {
+async function updateOrderProduct({id, quantity, purchasePrice}) {
     try {
         const { rows: [order_product] } = await client.query(`
         UPDATE order_products
-        SET quantity=$2
+        SET quantity=$2, purchasePrice=$3
         WHERE id=$1
         RETURNING *
-        `, [id, quantity]);
+        `, [id, quantity, purchasePrice]);
         return order_product;
     } catch (error) {
         throw error;

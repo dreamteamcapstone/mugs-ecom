@@ -9,7 +9,8 @@ const {
 router.patch("/:id", async (req, res, next) => {
     try {
         const {id} = req.params;
-        const orderProduct = await updateOrderProduct({id, quantity});
+        const {quantity, purchasePrice} = req.body;
+        const orderProduct = await updateOrderProduct({id, quantity, purchasePrice});
         res.send(orderProduct);
     } catch (error) {
         next(error);

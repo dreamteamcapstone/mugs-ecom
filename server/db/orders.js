@@ -10,6 +10,7 @@ const createOrder = async ({ userId, purchased }) => {
         `, [userId, purchased]);
 
         return order;
+        console.log(order);
     } catch (error) {
         throw error;
     }
@@ -61,7 +62,6 @@ const getAllOrders = async () => {
           `
           );
     
-          
         return await attachOrderProductsToOrder(orders);
       } catch (error) {
         throw error;
