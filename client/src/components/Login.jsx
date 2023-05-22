@@ -1,5 +1,4 @@
 import { React, useState } from "react";
-import { NavLink } from "react-router-dom";
 import { authenticateUser } from "../api/auth";
 
 const Login = ({setToken, setIsLoggedIn, setUser}) => {
@@ -9,14 +8,14 @@ const Login = ({setToken, setIsLoggedIn, setUser}) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = await authenticateUser({email: email, password: password});
-        if(data) {
-            return data;
-            // setToken(data.token);
-            // setIsLoggedIn(true);
-            // setUser(data.user);
+        if(data.token) {
+            console.log("Data:", data)
+            setToken(data.token);
+            setIsLoggedIn(true);
+            setUser(data.user);
         } else {alert('Incorrect Username or Password, please try again')}
-        // setUsername("");
-        // setPassword("");
+        setEmail("");
+        setPassword("");
     }
     
     return(
