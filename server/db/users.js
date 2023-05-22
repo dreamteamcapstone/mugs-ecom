@@ -18,10 +18,10 @@ async function createUser({email, password, address, phoneNumber}) {
     const newPassword = await hashedPassword({password});
 
     const { rows: [user] } = await client.query(`
-      INSERT INTO users(email, password, address, phoneNumber)
+      INSERT INTO users(email, password, address, "phoneNumber")
       VALUES ($1, $2, $3, $4) 
       ON CONFLICT (email) DO NOTHING
-      RETURNING id, email, address, phoneNumber;
+      RETURNING id, email, address, "phoneNumber";
     `, [email, newPassword, address, phoneNumber])
     return user;
   } catch (error) {

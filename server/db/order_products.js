@@ -3,7 +3,7 @@ const client = require('./client');
 async function addOrderProduct({orderId, productId, quantity, purchasePrice}) {
     try {
         const { rows: [order_product] } =await client.query(`
-            INSERT INTO order_products("orderId", "productId", quantity, purchasePrice)
+            INSERT INTO order_products("orderId", "productId", quantity, "purchasePrice")
             VALUES ($1, $2, $3, $4)
             ON CONFLICT ("orderId", "productId") DO NOTHING
             RETURNING *;
@@ -18,7 +18,7 @@ async function updateOrderProduct({id, quantity, purchasePrice}) {
     try {
         const { rows: [order_product] } = await client.query(`
         UPDATE order_products
-        SET quantity=$2, purchasePrice=$3
+        SET quantity=$2, "purchasePrice"=$3
         WHERE id=$1
         RETURNING *
         `, [id, quantity, purchasePrice]);
@@ -62,7 +62,7 @@ async function attachOrderProductsToOrder(orders) {
   
     const { rows: products } = await client.query(
       `
-    SELECT products.*, order_products.quantity, order_products.purchasePrice, order_products."orderId", order_products.id AS "orderProductId"
+    SELECT products.*, order_products.quantity, order_products."purchasePrice", order_products."orderId", order_products.id AS "orderProductId"
     FROM products
     JOIN order_products ON order_products."productId" = products.id
     WHERE order_products."orderId" IN (${position});

@@ -40,12 +40,13 @@ const createTables = async () => {
       address VARCHAR(255),
       phoneNumber VARCHAR(15),
       UNIQUE(address, phoneNumber)
+
     );
     CREATE TABLE products(
       id SERIAL PRIMARY KEY,
       description TEXT NOT NULL,
       name VARCHAR(255) UNIQUE NOT NULL,
-      imageUrl TEXT NOT NULL,
+      "imageUrl" TEXT NOT NULL,
       price MONEY NOT NULL,
       inventory INTEGER NOT NULL
     );
@@ -59,7 +60,7 @@ const createTables = async () => {
       "orderId" INTEGER REFERENCES orders(id),
       "productId" INTEGER REFERENCES products(id),
       quantity INTEGER NOT NULL,
-      purchasePrice Money NOT NULL,
+      "purchasePrice" Money NOT NULL,
       UNIQUE ("orderId", "productId")
     );
     `);
