@@ -13,7 +13,6 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-
 router.post('/login', async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -33,9 +32,10 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
+
 router.post('/register', async (req, res, next) => {
   try {
-    const {email, password} = req.body;
+    const {email, password, address, phoneNumber} = req.body;
 
     if(password.length < 5) {
       next({
@@ -45,7 +45,7 @@ router.post('/register', async (req, res, next) => {
     }
     //password must be longer than 4 characters, at least 5.
         const _user = await getUserByEmail(email);
-        console.log(_user);
+
         if(_user) {
             next({
                 message: "Registration Error",
@@ -53,7 +53,7 @@ router.post('/register', async (req, res, next) => {
         });
         } else {
 
-        const user = await createUser({email, password});
+        const user = await createUser({email, password, address, phoneNumber});
 
         const token = jwt.sign({id: user.id, email}, 
             process.env.JWT_SECRET, { expiresIn: '1w' });
@@ -85,11 +85,7 @@ router.get('/:email/orders', requireUser, async (req, res, next) => {
       const allUserOrders = await getAllOrdersByUser({email});
       //returns All active carts and orders (will need isPurchased boolean)
       res.send(allUserOrders);
-    } else {
-      next({
-
-      })
-    }
+    } 
   } catch (error) {
     next(error);
   }

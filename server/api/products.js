@@ -45,7 +45,7 @@ router.get('/:productId', async (req, res, next) => {
 
 });
 
-// GET A Product By Name
+// GET A Product By Name //Not working as of 5/21 -GG
 router.get('/:name', async (req, res, next) => {
     const { name } = req.params;
 
@@ -74,7 +74,7 @@ router.get('/:name', async (req, res, next) => {
 
 //Create A New Product
 router.post('/', requireUser, async (req, res, next) => {
-    const { description, name, imageUrl, price } = req.body
+    const { description, name, imageUrl, price, inventory } = req.body
     
     const takenProduct = await getProductByName(name);
 
@@ -85,7 +85,7 @@ router.post('/', requireUser, async (req, res, next) => {
       });
     } else {
         try {
-          const newProduct = await createProduct({description, name, imageUrl, price});
+          const newProduct = await createProduct({description, name, imageUrl, price, inventory});
           res.send(
              newProduct
          );
@@ -95,6 +95,7 @@ router.post('/', requireUser, async (req, res, next) => {
   }
 });
 
+//Getting error "column "imageUrl" of relation "products" does not exist"
 //Update A Product
 router.patch('/:productId', requireUser, async (req, res, next) => {
     const { description, name, imageUrl, price, inventory } = req.body
@@ -109,15 +110,15 @@ router.patch('/:productId', requireUser, async (req, res, next) => {
             message: "Unable to find a product by that Id"
         });
         }
-            const updatedProduct = await updateProduct({ 
-                id: productId, 
-                description,
-                name,
-                imageUrl,
-                price,
-                inventory
-            });
-            res.send(updatedProduct)
+
+        const updatedProduct = await updateProduct(productId, { 
+            description,
+            name,
+            imageUrl,
+            price,
+            inventory
+        });
+        res.send(updatedProduct)
      } catch (error) {
         next(error)
      }
