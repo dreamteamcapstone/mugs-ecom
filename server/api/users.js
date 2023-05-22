@@ -53,7 +53,7 @@ router.post('/register', async (req, res, next) => {
         });
         } else {
 
-        const user = await createUser({email, password});
+        const user = await createUser({email, password, address, phoneNumber, admin});
 
         const token = jwt.sign({email: user.email, password: user.password}, 
             process.env.JWT_SECRET, { expiresIn: '1w' });
@@ -77,13 +77,13 @@ router.get('/me', requireUser, async (req, res, next) => {
   }
 });
 
-router.get('/:email/orders', requireUser, async (req, res, next) => {
-  const { email } = req.params;
+router.get('/:id/orders', requireUser, async (req, res, next) => {
+  const { id } = req.params;
   try {
-    if(req.user && req.user.email === email) {
-      const allUserOrders = await getAllOrdersByUser({email});
-      //returns All active carts and orders (will need isPurchased boolean)
-      res.send(allUserOrders);
+    if(req.user && req.user.id === id) {
+      const allUserOrders = await getAllOrdersByUser(id);
+      res.send(allUserOrders.filter((userOrder) => userOrder.purchased === true));
+      
     } 
   } catch (error) {
     next(error);

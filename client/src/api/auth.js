@@ -1,4 +1,5 @@
 
+
 export const authenticateUser = async ({email, password}) => {
     try {
     const response = await fetch(`api/users/login`, {

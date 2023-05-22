@@ -31,6 +31,7 @@ const dropTables = async () => {
 
 const createTables = async () => {
   try {
+
     console.log('Starting to create all tables...');
     await client.query(`
     CREATE TABLE users(
@@ -40,7 +41,6 @@ const createTables = async () => {
       address VARCHAR(255),
       phoneNumber VARCHAR(15),
       UNIQUE(address, phoneNumber)
-
     );
     CREATE TABLE products(
       id SERIAL PRIMARY KEY,
@@ -77,9 +77,9 @@ const createInitialUsers = async () => {
   console.log('Adding initial users to "Users" table...');
   try {
     const usersToCreate = [
-      {email: "hello@gmail.com", password: "123456", address: "123 East Main Street", phoneNumber: "4351234567"},
-      {email: "gmail@gmail.com", password: "password", address: "234 Point Place", phoneNumber: "810-636-1728"},
-      {email: "foo@yahoo.com", password: "ldfja;ass", address: "1024 Washington Ave", phoneNumber: "3856744444"},
+      {email: "hello@gmail.com", password: "123456", address: "123 East Main Street", phoneNumber: "4351234567", admin: false},
+      {email: "gmail@gmail.com", password: "password", address: "234 Point Place", phoneNumber: "810-636-1728", admin: false}, 
+      {email: "admin@yahoo.com", password: "admin", address: "1024 Washington Ave", phoneNumber: "3856744444", admin: true},
     ]
     const users = await Promise.all(usersToCreate.map(createUser));
     console.log(users);

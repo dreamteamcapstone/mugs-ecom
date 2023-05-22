@@ -40,10 +40,10 @@ const getOrderById = async (id) => {
       }
 }
 
-const getAllOrdersByUser = async (email) => {
+const getAllOrdersByUser = async (id) => {
     try {
         let orders = await getAllOrders();
-        orders = orders.filter(order=> {return order.customerEmail === email});
+        orders = orders.filter(order=> {return order.userId === id});
         console.log(orders[0].products[0])
         return orders;
         

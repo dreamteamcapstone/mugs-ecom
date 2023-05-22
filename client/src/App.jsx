@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom';
+import { Login, Register, Profile } from './components';
 import { Login, Register } from './components';
 import { getMe } from './api/auth';
 
@@ -10,7 +11,7 @@ function App() {
   const [user, setUser] = useState({});
   const [token, setToken] = useState(localStorage.token);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+
   useEffect(() => {
     const getData = async () => {
       // const fetchedProducts = await fetchProducts();
@@ -31,6 +32,7 @@ function App() {
       <Routes>
         <Route path='/login' element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}></Route>
         <Route path='/register' element={<Register setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}></Route>
+        <Route path='/profile' element={<Profile token={token} user={user} isLoggedIn={isLoggedIn}/>}></Route>
       </Routes>
     </div>
   )
