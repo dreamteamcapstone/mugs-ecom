@@ -14,7 +14,7 @@ router.get('/', requireUser, async (req, res, next) => {
   });
 
 // POST /api/orders
-router.post('/', async (req, res, next) => {
+router.post('/', requireUser, async (req, res, next) => {
     try {
         const { userId, purchased } = req.body;
     
@@ -27,7 +27,7 @@ router.post('/', async (req, res, next) => {
   });
 
 // PATCH /api/orders/:orderId
-router.patch('/:orderId', async (req, res, next) => {
+router.patch('/:orderId', requireUser, async (req, res, next) => {
     try {
         const { orderId } = req.params;
         const { userId, purchased } = req.body;
@@ -48,7 +48,7 @@ router.patch('/:orderId', async (req, res, next) => {
 
 
 // DELETE /api/orders/:orderId
-router.delete('/:orderId', async (req, res, next) => {
+router.delete('/:orderId', requireUser, async (req, res, next) => {
     try {
         const { orderId } = req.params;
     
@@ -65,8 +65,9 @@ router.delete('/:orderId', async (req, res, next) => {
       }  
   });
 
-// POST /api/orders/:orderId/products
-router.post('/:orderId/products', async (req, res, next) => {
+// POST /api/orders/:orderId/products 
+
+router.post('/:orderId/products', requireUser, async (req, res, next) => {
     try {
         const { orderId } = req.params;
         const { productId, quantity, purchasePrice } = req.body;
@@ -75,10 +76,14 @@ router.post('/:orderId/products', async (req, res, next) => {
         let productExistsInCart = false;
         for (let i=0; i < orderProducts.length; i++) {
             const productRow = orderProducts[i];
-            if (productRow.productId === productId) {
+            if (productRow.productId === productId && 
+                productRow.purchasePrice === purchasePrice) {
                 productExistsInCart = true;
-                const addQuantity = await updateOrderProduct({id: productId, quantity: quantity++ })
-                res.send(addQuantity);
+                const updatedQuantity = quantity + productRow.quantity;
+                console.log(updatedQuantity);
+                const updatedPurchasePrice = purchasePrice * updatedQuantity;
+                const updatedOrderItem = await updateOrderProduct({productId, updatedQuantity, updatedPurchasePrice})
+                res.send(updatedOrderItem);
             } 
             
             if (!productExistsInCart) {
@@ -97,7 +102,7 @@ router.post('/:orderId/products', async (req, res, next) => {
   });
 
 //GET /api/orders/:orderId/products
-  router.get('/orders/:orderId/products', async (req, res, next) => {
+  router.get('/:orderId/products', requireUser, async (req, res, next) => {
     try {
       const { orderId } = req.params;
   
