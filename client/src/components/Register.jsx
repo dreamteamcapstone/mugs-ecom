@@ -9,13 +9,12 @@ const Register = ({setToken, setIsLoggedIn, setUser}) => {
         event.preventDefault();
         console.log("hit the handle submit");
         const data = await authenticateNewUser({email: email, password: password});
-        if(data) {
-            // if data.token
-            console.log(data);
-            // setToken(data.token);
-            // setIsLoggedIn(true);
-            // setUser(data.user);
-        } else {alert('That username is taken!')}
+        if(data.token) {
+            console.log("Data:", data)
+            setToken(data.token);
+            setIsLoggedIn(true);
+            setUser(data.user);
+        } else { alert('That username is taken!') }
         setEmail("");
         setPassword("");
     }
@@ -26,7 +25,7 @@ const Register = ({setToken, setIsLoggedIn, setUser}) => {
         <h2>Register</h2>
         <form onSubmit={handleSubmit} className="registerForm">
             <input
-            placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)}
+            type="email" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)}
             required
             ></input>
             <input
