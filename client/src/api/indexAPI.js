@@ -1,6 +1,22 @@
+const BASE_URL = `http://localhost:8080/api`;
 
-// const BASE_URL = `http://localhost:8080/api`
+// Get All Products 
+export const fetchAllProducts = async () => {
+   try {
+    const response = await fetch(`${BASE_URL}/products`, {
+       headers: {
+        'Content-Type': 'application/json',
+       }, 
+    });
 
+    const result = await response.json()
+    
+    console.log("This is the result:", result)
+    return result;
+   } catch (error) {
+    console.error(error)
+   }
+}
 
 //API calls here
 export const fetchUserOrders = async (user, token) => {
@@ -18,3 +34,4 @@ export const fetchUserOrders = async (user, token) => {
         console.error(err);
     }
 };
+
