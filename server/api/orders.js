@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {createOrder, getAllOrders, getOrderById, updateOrder, deleteOrder, getAllOrderProductsByOrder, updateOrderProduct, addOrderProduct} = require("../db");
+const {createOrder, getAllOrders, getOrderById, updateOrder, deleteOrder, getAllOrderProductsByOrder, getAllOrdersByUser, addOrderProduct} = require("../db");
 const { requireUser } = require('./utils')
 
 // GET /api/orders
