@@ -1,4 +1,4 @@
-const BASE_URL = `http://localhost.com:8080/api`
+// const BASE_URL = `http://localhost.com:8080/api`
 
 export const authenticateUser = async ({email, password}) => {
     try {
