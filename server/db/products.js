@@ -3,7 +3,7 @@ const client = require('./client');
 const createProduct = async ({ name, description, imageUrl, price, inventory}) => {
     try {
         const { rows: [product] } = await client.query(`
-            INSERT INTO products(name, description, imageUrl, price, inventory)
+            INSERT INTO products(name, description, "imageUrl", price, inventory)
             VALUES ($1, $2, $3, $4, $5)
             ON CONFLICT (name) DO NOTHING
             RETURNING *;
@@ -52,15 +52,15 @@ const getProductByName = async (name) => {
 }
 
 const updateProduct = async (id, ...fields) => {
-    console.log(fields);
+    console.log({fields});
     const [ inputs ] = fields
 try {
     const keys = Object.keys(inputs);
-
+    console.log({inputs});
     const setString = keys.map((key, index) => `"${key}"=$${index + 1}`)
       .join(', ');
-
-
+      console.log({setString});
+      console.log(id);
          const { rows: [ product ] } = await client.query(`
           UPDATE products
           SET ${ setString }

@@ -109,16 +109,19 @@ router.patch('/:productId', requireUser, async (req, res, next) => {
             name: "Error Finding Product",
             message: "Unable to find a product by that Id"
         });
-        }
 
-        const updatedProduct = await updateProduct(productId, { 
-            description,
+        }
+        
+        const updatedProduct = await updateProduct(productId, 
+            {description,
+
             name,
             imageUrl,
             price,
             inventory
-        });
+            });
         res.send(updatedProduct)
+
      } catch (error) {
         next(error)
      }

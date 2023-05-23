@@ -1,14 +1,16 @@
 import { React, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { authenticateUser } from "../api/auth";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Login = ({setToken, setIsLoggedIn, setUser}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = await authenticateUser({email: email, password: password});
+        console.log(data);
         if(data.token) {
             console.log("Data:", data)
             setToken(data.token);
@@ -17,6 +19,7 @@ const Login = ({setToken, setIsLoggedIn, setUser}) => {
         } else {alert('Incorrect Username or Password, please try again')}
         setEmail("");
         setPassword("");
+        navigate('/profile');
     }
     
     return(
