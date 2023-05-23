@@ -37,10 +37,10 @@ router.post('/register', async (req, res, next) => {
   try {
     const {email, password, address, phoneNumber, admin} = req.body;
 
-    if(password.length < 5) {
+    if(password.length < 8) {
       next({
         name: "Password Too Short",
-        message: "password must be at least 5 Characters long"
+        message: "password must be at least 8 Characters long"
       })
     }
     //password must be longer than 4 characters, at least 5.
@@ -61,8 +61,7 @@ router.post('/register', async (req, res, next) => {
         res.send({
             message: "User has been registered & Logged In",
             token: token,
-            user: {email: user.email,
-            id: user.id}
+            user: user
         });
     }
   } catch (error) {
