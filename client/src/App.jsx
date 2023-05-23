@@ -2,9 +2,11 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom';
-import { Login, Register, Profile } from './components';
-import { Login, Register } from './components';
-import { getMe } from './api/auth';
+import { 
+  Login, 
+  Register, 
+  Profile } from './components';
+//import { getMe } from './api/auth';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -17,9 +19,9 @@ function App() {
       // const fetchedProducts = await fetchProducts();
       // setProducts(fetchedProducts);
       if(token) {
-        const me = await getMe(token);
-        console.log(me);  
-        setUser(me);
+        // const me = await getMe(token);
+        // console.log(me);  
+        // setUser(me);
         setIsLoggedIn(true);
       }
     }
@@ -32,7 +34,7 @@ function App() {
       <Routes>
         <Route path='/login' element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}></Route>
         <Route path='/register' element={<Register setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}></Route>
-        <Route path='/profile' element={<Profile token={token} user={user} isLoggedIn={isLoggedIn}/>}></Route>
+        <Route path='/profile' element={<Profile token={token} user={user} isLoggedIn={isLoggedIn} />}></Route>
       </Routes>
     </div>
   )

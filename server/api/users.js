@@ -24,9 +24,9 @@ router.post('/login', async (req, res, next) => {
   }
   try {
     const user = await getUser({email, password});
-    const token = jwt.sign({email: user.email, password: user.password}, process.env.JWT_SECRET, { expiresIn: '2w' });
+    const token = jwt.sign(user, JWT_SECRET, { expiresIn: '2w' });
 
-    res.send({ user: user, message: "Logged In!", token: token})
+    res.send({ message: "Logged In!", token: token, user: user})
   } catch(error){
     next(error);
   }
@@ -34,8 +34,8 @@ router.post('/login', async (req, res, next) => {
 
 
 router.post('/register', async (req, res, next) => {
-  const {email, password} = req.body;
   try {
+    const {email, password, address, phoneNumber, admin} = req.body;
 
     if(password.length < 8) {
       next({
@@ -55,7 +55,7 @@ router.post('/register', async (req, res, next) => {
 
         const user = await createUser({email, password, address, phoneNumber, admin});
 
-        const token = jwt.sign({email: user.email, password: user.password}, 
+        const token = jwt.sign({id: user.id, email}, 
             process.env.JWT_SECRET, { expiresIn: '1w' });
 
         res.send({
@@ -83,7 +83,6 @@ router.get('/:id/orders', requireUser, async (req, res, next) => {
     if(req.user && req.user.id === id) {
       const allUserOrders = await getAllOrdersByUser(id);
       res.send(allUserOrders.filter((userOrder) => userOrder.purchased === true));
-      
     } 
   } catch (error) {
     next(error);

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react"
 import {fetchUserOrders} from '../api/indexAPI'
 
-const Profile = ({isLoggedIn, user,}) => {
+const Profile = ({isLoggedIn, user, token}) => {
     const [userOrders, setUserOrders] = useState([])
-
+    console.log(userOrders);
     useEffect(() => {
         const getOrderHistory = async () => {
-            const userPurchasedOrders = await fetchUserOrders(user);
+            const userPurchasedOrders = await fetchUserOrders(user, token);
             setUserOrders(userPurchasedOrders);
+            console.log(userOrders);
         };
         getOrderHistory();
     }, [])
@@ -17,7 +18,7 @@ const Profile = ({isLoggedIn, user,}) => {
         {isLoggedIn ? 
         (<>
             <h2>Your Account Info</h2>
-            <h3>Customer Info</h3>
+            <h3>Customer Info:</h3>
             {userOrders.map((order) => {
                 return(
                     <div key={order.id} ClassName='profileOrder'>
@@ -32,11 +33,11 @@ const Profile = ({isLoggedIn, user,}) => {
                                     </ul>
                                 </div>
                             )
-                        })};
+                        })}
                     </div>
                 )
-            })};
-            <h3>Your Order History</h3>
+            })}
+            <h3>Your Order History:</h3>
         </>) 
         : 
         (<>
