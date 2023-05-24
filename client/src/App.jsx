@@ -32,7 +32,7 @@ function App() {
     <div className="App">
       { <Navbar user={user} setUser={setUser} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} setToken={setToken} /> }
       <Routes>
-        <Route path="/" element={<Home  products={products} setProducts={setProducts} />} />
+        <Route path="/" element={<Home  products={products} setProducts={setProducts} setSelectedProduct={setSelectedProduct} />} />
         <Route path='/login' element={<Login user={user} setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}></Route>
         <Route path='/register' element={<Register setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} user={user} token={token} />}></Route>
         <Route path='/profile' element={<Profile token={token} user={user} isLoggedIn={isLoggedIn} />}></Route>
