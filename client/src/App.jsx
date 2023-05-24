@@ -21,7 +21,6 @@ function App() {
         console.log(me);  
         setUser(me);
         setIsLoggedIn(true);
-        console.log("tokentokentoken")
       }
     }
     getData();

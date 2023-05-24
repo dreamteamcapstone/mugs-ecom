@@ -71,13 +71,13 @@ router.post('/register', async (req, res, next) => {
 router.get('/me', requireUser, async (req, res, next) => {
   try {
     if(req.user){
-      const {email} = req.user;
-      const user = await getUserByEmail(email);
-      res.send(user);
-    } else res.status(401);
-  } catch (error) {
-    next(error);
-  }
+        const {email} = req.user;
+        const user = await getUserByEmail(email)
+        res.send(user)
+    }else res.status(401)
+} catch (error) {
+    next(error)
+}
 });
 
 router.get('/:id/orders', requireUser, async (req, res, next) => {
