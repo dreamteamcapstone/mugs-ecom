@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom';
-import { Login, Register, Home, Navbar, Profile} from './components';
+import { Login, Register, Home, Navbar, Profile, SingleProduct } from './components';
 import { fetchAllProducts } from './api/indexAPI';
 import { getMe } from './api/auth';
 
@@ -11,6 +11,7 @@ function App() {
   const [user, setUser] = useState({});
   const [token, setToken] = useState(localStorage.token);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -35,6 +36,7 @@ function App() {
         <Route path='/login' element={<Login user={user} setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}></Route>
         <Route path='/register' element={<Register setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} user={user} token={token} />}></Route>
         <Route path='/profile' element={<Profile token={token} user={user} isLoggedIn={isLoggedIn} />}></Route>
+        <Route path='/singleproduct' element={<SingleProduct selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct}/>}></Route>
       </Routes>
 
    
