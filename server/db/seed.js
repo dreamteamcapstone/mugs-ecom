@@ -38,6 +38,8 @@ const createTables = async () => {
       id SERIAL PRIMARY KEY,
       email VARCHAR(255) UNIQUE NOT NULL,
       password VARCHAR(255) NOT NULL,
+      "firstName" VARCHAR(255),
+      "lastName" VARCHAR(255),
       address VARCHAR(255) UNIQUE,
       "phoneNumber" VARCHAR(15) UNIQUE,
       admin BOOLEAN DEFAULT false

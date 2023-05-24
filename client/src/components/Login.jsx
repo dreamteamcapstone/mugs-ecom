@@ -1,8 +1,8 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import { authenticateUser } from "../api/auth";
 import { NavLink, useNavigate } from "react-router-dom";
 
-const Login = ({setToken, setIsLoggedIn, setUser}) => {
+const Login = ({user, setToken, setIsLoggedIn, setUser}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
@@ -10,15 +10,15 @@ const Login = ({setToken, setIsLoggedIn, setUser}) => {
         event.preventDefault();
         const data = await authenticateUser({email: email, password: password});
         console.log(data);
+        console.log(data.user);
         if(data.token) {
-            console.log("Data:", data)
             setToken(data.token);
             setIsLoggedIn(true);
             setUser(data.user);
         } else {alert('Incorrect Username or Password, please try again')}
         setEmail("");
         setPassword("");
-        navigate('/profile');
+        navigate('/');
     }
     
     return(
@@ -27,7 +27,7 @@ const Login = ({setToken, setIsLoggedIn, setUser}) => {
         <h2>Log In</h2>
         <form onSubmit={handleSubmit} className="loginForm">
             <input
-            placeholder="email" value={email} onChange={(event) => setEmail(event.target.value)}
+            placeholder="email" value={email} onChange={(event) => setEmail(event.target.value.toLowerCase())}
             ></input>
             <input
             placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)}
