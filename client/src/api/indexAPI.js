@@ -55,6 +55,25 @@ export const createUserOrder = async ({userId, purchased}, token) => {
   }
 }
 
+export const addProductToOrder = async (token, orderId , {productId, quantity, purchasePrice}) => {
+  try {
+     const response = await fetch(`api/${orderId}/products`, {
+       method: "POST",
+       headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${token}`
+       },
+       body: JSON.stringify({productId, quantity, purchasePrice}),
+     });
+     console.log(response);
+     const result = await response.json();
+     console.log("add order to product:", result);
+     return result;
+  } catch (error) {
+      console.error(error);
+  }
+};
+
 export const fetchOrderProducts = async (token, orderId) => {
   try {
     const response = await fetch(`api/orders/${orderId}/products`, {
