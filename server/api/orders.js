@@ -20,7 +20,7 @@ router.post('/', requireUser, async (req, res, next) => {
     
         const order = await createOrder({ userId, purchased });
 
-        res.json(order);
+        res.send(order);
       } catch (error) {
         next(error);
       }

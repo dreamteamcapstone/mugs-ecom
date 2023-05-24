@@ -37,6 +37,7 @@ export const fetchUserOrders = async (user, token) => {
 
 export const createUserOrder = async ({userId, purchased}, token) => {
   try {
+    console.log("hello from create user order")
     const response = await fetch(`api/orders`, {
       method: "POST",
       headers: {
@@ -45,6 +46,7 @@ export const createUserOrder = async ({userId, purchased}, token) => {
       },
       body: JSON.stringify({userId, purchased})
     });
+      console.log(response);
     const result = await response.json();
     console.log("create user order result:", result);
     return result;
