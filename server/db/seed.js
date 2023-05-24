@@ -137,11 +137,11 @@ const createInitialOrders = async () => {
     },
     {
       userId: 1,
-      purchased: true,
+      purchased: false,
     },
     {
       userId: 3,
-      purchased: true,
+      purchased: false,
     },
   ]
   const orders = await Promise.all(
