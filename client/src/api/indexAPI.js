@@ -1,11 +1,10 @@
-import { json } from "react-router-dom";
+// const BASE_URL = `http://localhost:8080/api`;
 
-const BASE_URL = `http://localhost:8080/api`;
 
 // Get All Products 
 export const fetchAllProducts = async () => {
    try {
-    const response = await fetch(`${BASE_URL}/products`, {
+    const response = await fetch(`api/products`, {
        headers: {
         'Content-Type': 'application/json',
        }, 
@@ -13,7 +12,6 @@ export const fetchAllProducts = async () => {
 
     const result = await response.json()
     
-    console.log("This is fetchAllProducts result:", result)
     return result;
    } catch (error) {
     console.error(error)

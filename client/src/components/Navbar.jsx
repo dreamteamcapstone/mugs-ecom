@@ -6,12 +6,12 @@ const Navbar = ({ user, setUser, setIsLoggedIn, isLoggedIn, setToken }) => {
         <>
         {isLoggedIn ? (
 
-            <nav>
-            <h1>Mugs-A-Million</h1>
+            <nav className='navbar'>
+            <h1 className='title'>Mugs-A-Million</h1>
             <div>
                 <p>Hello, <NavLink to="/myprofile">{user.firstName}</NavLink></p>
                 <NavLink to="/">Home</NavLink>
-                {/* <NavLink to="/myprofile">My Profile</NavLink> */}
+                <NavLink to="/profile">My Profile</NavLink>
                 <NavLink to="/cart">Cart</NavLink>
                 <NavLink to="/" onClick={() => {
                     setIsLoggedIn(false)
@@ -23,11 +23,10 @@ const Navbar = ({ user, setUser, setIsLoggedIn, isLoggedIn, setToken }) => {
             </nav>
 
         ) : (
-            <nav>
-                <h1>Mugs-A-Million</h1>
+            <nav className='navbar'>
+                <h1 className='title'>Mugs-A-Million</h1>
                 <div>
                  <NavLink to="/">Home</NavLink>
-                 {/* <NavLink to="/myprofile">My Profile</NavLink> */}
                  <NavLink to="/cart">Cart</NavLink>
                  <NavLink to="/login">Login</NavLink>
                 </div>

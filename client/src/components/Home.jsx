@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const Home = ( { products } ) => {
+const Home = ( { products, setSelectedProduct, selectedProduct } ) => {
+  const navigate = useNavigate();
     return (
         <>
         
@@ -8,7 +10,10 @@ const Home = ( { products } ) => {
        {products.length ? (
          products.map(( product ) => {
           return (
-            <div key={product._id}>
+            <div key={product._id} onClick={() => {
+              setSelectedProduct(product)
+              navigate('/singleproduct')
+             }}>
                <h2>{product.name}</h2>
                <h3>{product.price}</h3>
                <em>{product.imageUrl}</em>
