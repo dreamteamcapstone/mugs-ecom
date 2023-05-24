@@ -11,7 +11,7 @@ export const authenticateUser = async ({ email, password }) => {
     // console.log("RESPONSE", response)
 
     const result = await response.json();
-    console.log("authenticate user result", result);
+    // console.log("authenticate user result", result);
     const { user, message, token } = result;
     if (token) {
       localStorage.setItem("token", token);
@@ -22,19 +22,19 @@ export const authenticateUser = async ({ email, password }) => {
   }
 };
 
-export const authenticateNewUser = async ({ email, password }) => {
+export const authenticateNewUser = async ({ email, password, firstName, lastName, address, phoneNumber }) => {
   try {
     const response = await fetch(`api/users/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, firstName, lastName, address, phoneNumber }),
     });
     //   console.log("RESPONSE", response)
 
     const result = await response.json();
-    console.log("authenticate new user result", result);
+    // console.log("authenticate new user result", result);
     const { user, message, token } = result;
     if (token) {
       localStorage.setItem("token", token);

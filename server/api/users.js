@@ -15,7 +15,6 @@ router.get('/', async (req, res, next) => {
 
 router.post('/login', async (req, res, next) => {
   const { email, password } = req.body;
-
   if (!email || !password) {
     next({
       name: "Missing Credentials",
@@ -35,7 +34,7 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/register', async (req, res, next) => {
   try {
-    const {email, password, address, phoneNumber, admin} = req.body;
+    const {email, password, firstName, lastName, address, phoneNumber, admin} = req.body;
 
     if(password.length < 8) {
       next({
@@ -53,7 +52,7 @@ router.post('/register', async (req, res, next) => {
         });
         } else {
 
-        const user = await createUser({email, password, address, phoneNumber, admin});
+        const user = await createUser({email, password, firstName, lastName, address, phoneNumber, admin});
 
         const token = jwt.sign({id: user.id, email}, 
             process.env.JWT_SECRET, { expiresIn: '1w' });

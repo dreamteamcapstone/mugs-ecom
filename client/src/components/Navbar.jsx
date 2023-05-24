@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from 'react-router-dom';
 
-const Navbar = ({ setUser, setIsLoggedIn, isLoggedIn, setToken }) => {
+const Navbar = ({ user, setUser, setIsLoggedIn, isLoggedIn, setToken }) => {
     return (
         <>
         {isLoggedIn ? (
@@ -9,8 +9,9 @@ const Navbar = ({ setUser, setIsLoggedIn, isLoggedIn, setToken }) => {
             <nav>
             <h1>Mugs-A-Million</h1>
             <div>
+                <p>Hello, <NavLink to="/myprofile">{user.firstName}</NavLink></p>
                 <NavLink to="/">Home</NavLink>
-                <NavLink to="/myprofile">My Profile</NavLink>
+                {/* <NavLink to="/myprofile">My Profile</NavLink> */}
                 <NavLink to="/cart">Cart</NavLink>
                 <NavLink to="/" onClick={() => {
                     setIsLoggedIn(false)
@@ -26,9 +27,9 @@ const Navbar = ({ setUser, setIsLoggedIn, isLoggedIn, setToken }) => {
                 <h1>Mugs-A-Million</h1>
                 <div>
                  <NavLink to="/">Home</NavLink>
-                 <NavLink to="/login">Login</NavLink>
-                 <NavLink to="/myprofile">My Profile</NavLink>
+                 {/* <NavLink to="/myprofile">My Profile</NavLink> */}
                  <NavLink to="/cart">Cart</NavLink>
+                 <NavLink to="/login">Login</NavLink>
                 </div>
             </nav>
         )}
