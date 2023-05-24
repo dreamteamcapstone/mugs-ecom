@@ -10,7 +10,7 @@ const Home = ( { products, setSelectedProduct, selectedProduct } ) => {
        {products.length ? (
          products.map(( product ) => {
           return (
-            <div key={product._id} onClick={() => {
+            <div key={product.id} onClick={() => {
               setSelectedProduct(product)
               navigate('/singleproduct')
              }}>

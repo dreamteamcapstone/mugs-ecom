@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom';
-import { Login, Register, Home, Navbar, Profile, SingleProduct } from './components';
-import { fetchAllProducts } from './api/indexAPI';
+import { Login, Register, Home, Navbar, Profile, SingleProduct, Cart } from './components';
+import { fetchAllProducts, fetchUserOrders } from './api/indexAPI';
 import { getMe } from './api/auth';
 
 function App() {
@@ -18,16 +18,29 @@ function App() {
     const getData = async () => {
       const fetchedProducts = await fetchAllProducts();
       setProducts(fetchedProducts);
+    }
+    getData();
+  }, [])
+
+  useEffect(() => {
+    const getUserData = async() => {
       if(token) {
         const me = await getMe(token);
         // console.log(me);  
         setUser(me);
         setIsLoggedIn(true);
+        const userOrders = await fetchUserOrders(me, token);
+        console.log(userOrders);
+        const openOrder = userOrders.find(order => order.purchased === false);
+        // console.log("hi", userOrders.find(order => order.purchased === false));
+        console.log(openOrder)
+        setCart(openOrder);
       }
     }
-    getData();
-  }, [])
+    getUserData();
+  }, [token])
 
+console.log(cart);
   return (
 
     <div className="App">
@@ -35,9 +48,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home  products={products} setProducts={setProducts} setSelectedProduct={setSelectedProduct} />} />
         <Route path='/login' element={<Login user={user} setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}></Route>
-        <Route path='/register' element={<Register setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} user={user} token={token} />}></Route>
+        <Route path='/register' element={<Register setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} user={user} token={token} setCart={setCart} />}></Route>
         <Route path='/profile' element={<Profile token={token} user={user} isLoggedIn={isLoggedIn} />}></Route>
         <Route path='/singleproduct' element={<SingleProduct selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct} cart={cart} setCart={setCart} token={token} />}></Route>
+        <Route path='/cart' element={<Cart cart={cart} token={token} user={user}/>}></Route>
+
       </Routes>
 
    

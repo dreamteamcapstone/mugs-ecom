@@ -56,7 +56,7 @@ router.post('/register', async (req, res, next) => {
 
         const token = jwt.sign({id: user.id, email}, 
             process.env.JWT_SECRET, { expiresIn: '1w' });
-
+          // QUESTION: we could do things differently to have this route automatically await create order.
         res.send({
             message: "User has been registered & Logged In",
             token: token,
@@ -83,9 +83,9 @@ router.get('/me', requireUser, async (req, res, next) => {
 router.get('/:id/orders', requireUser, async (req, res, next) => {
   const { id } = req.params;
   try {
-    if(req.user && req.user.id === id) {
-      const allUserOrders = await getAllOrdersByUser(id);
-      res.send(allUserOrders.filter((userOrder) => userOrder.purchased === true));
+    if(req.user && req.user.id === +id) {
+      const allUserOrders = await getAllOrdersByUser(+id);
+      res.send(allUserOrders);
     } 
   } catch (error) {
     next(error);

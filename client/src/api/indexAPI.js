@@ -37,6 +37,7 @@ export const fetchUserOrders = async (user, token) => {
 
 export const createUserOrder = async ({userId, purchased}, token) => {
   try {
+    console.log("hello from create user order")
     const response = await fetch(`api/orders`, {
       method: "POST",
       headers: {
@@ -45,6 +46,7 @@ export const createUserOrder = async ({userId, purchased}, token) => {
       },
       body: JSON.stringify({userId, purchased})
     });
+      console.log(response);
     const result = await response.json();
     console.log("create user order result:", result);
     return result;
@@ -52,7 +54,6 @@ export const createUserOrder = async ({userId, purchased}, token) => {
     console.error(error);
   }
 }
-
 
 export const addProductToOrder = async (token, orderId , {productId, quantity, purchasePrice}) => {
   try {
@@ -73,3 +74,43 @@ export const addProductToOrder = async (token, orderId , {productId, quantity, p
   }
 };
 
+export const fetchOrderProducts = async (token, orderId) => {
+  try {
+    const response = await fetch(`api/orders/${orderId}/products`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch(error) {
+    console.error(error);
+  }
+}
+
+export const updateCartItem = async ({id, quantity, purchasePrice}) => {
+  try {
+    const response = await fetch(`api/order_products/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({quantity, purchasePrice})
+    });
+    const result = await response.json();
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const removeCartItem = async (id) => {
+  try {
+    const response = await fetch(`api/order_products/${id}`, {
+      method: "DELETE"
+    });
+    const result = await response.json();
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}

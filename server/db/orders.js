@@ -2,6 +2,7 @@ const client = require('./client');
 const {attachOrderProductsToOrder} = require("./order_products")
 
 const createOrder = async ({ userId, purchased }) => {
+  // QUESTION: is purchased necessary?
     try {
         const { rows: [order] } = await client.query(`
             INSERT INTO orders("userId", purchased)
@@ -10,7 +11,6 @@ const createOrder = async ({ userId, purchased }) => {
         `, [userId, purchased]);
 
         return order;
-        console.log(order);
     } catch (error) {
         throw error;
     }
@@ -33,7 +33,7 @@ const getOrderById = async (id) => {
           SELECT * FROM orders
           WHERE id = $1;
         `, [id]);
-    
+        
         return order;
       } catch (error) {
         console.error(error);
@@ -44,6 +44,7 @@ const getAllOrdersByUser = async (id) => {
     try {
         let orders = await getAllOrders();
         orders = orders.filter(order=> {return order.userId === id});
+        
         return orders;
         
     } catch (error) {
