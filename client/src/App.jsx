@@ -4,7 +4,7 @@ import './App.css'
 import { Route, Routes } from 'react-router-dom';
 import { Login, Register, Home, Navbar, Profile} from './components';
 import { fetchAllProducts } from './api/indexAPI';
-//import { getMe } from './api/auth';
+import { getMe } from './api/auth';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -17,10 +17,11 @@ function App() {
       const fetchedProducts = await fetchAllProducts();
       setProducts(fetchedProducts);
       if(token) {
-        // const me = await getMe(token);
-        // console.log(me);  
-        // setUser(me);
+        const me = await getMe(token);
+        console.log(me);  
+        setUser(me);
         setIsLoggedIn(true);
+        console.log("tokentokentoken")
       }
     }
     getData();
