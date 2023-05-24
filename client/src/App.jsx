@@ -18,7 +18,7 @@ function App() {
       setProducts(fetchedProducts);
       if(token) {
         const me = await getMe(token);
-        console.log(me);  
+        // console.log(me);  
         setUser(me);
         setIsLoggedIn(true);
       }
