@@ -41,7 +41,7 @@ async function destroyOrderProduct(id) {
       }
 }
 
-async function getAllOrderProductsByOrder(id) {
+async function getAllOrderProductsByOrder({ id }) {
     try {
         const {rows: order_products } = await client.query(`
         SELECT *

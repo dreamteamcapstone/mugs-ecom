@@ -6,9 +6,9 @@ const Profile = ({isLoggedIn, user, token}) => {
     // console.log(userOrders);
     useEffect(() => {
         const getOrderHistory = async () => {
-            const userPurchasedOrders = await fetchUserOrders(user, token);
-            setUserOrders(userPurchasedOrders);
-            console.log(userOrders);
+            const allUserOrders = await fetchUserOrders(user, token);
+            setUserOrders(allUserOrders);
+            console.log(allUserOrders)
         };
         getOrderHistory();
     }, [])
@@ -18,10 +18,15 @@ const Profile = ({isLoggedIn, user, token}) => {
         {isLoggedIn ? 
         (<>
             <h2>Your Account Info</h2>
-            <h3>Customer Info:</h3>
+            <ul>
+                <li>Email: {user.email}</li>
+                <li>Address: {user.address}</li>
+                <li>Phone: {user.phoneNumber}</li>
+            </ul>
+            <h3>Your Order History:</h3>
             {userOrders.map((order) => {
                 return(
-                    <div key={order.id} ClassName='profileOrder'>
+                    <div key={order.id}>
                         <h5>{order.id}</h5>
                         {order.products.map((product) => {
                             return(
@@ -37,7 +42,6 @@ const Profile = ({isLoggedIn, user, token}) => {
                     </div>
                 )
             })}
-            <h3>Your Order History:</h3>
         </>) 
         : 
         (<>

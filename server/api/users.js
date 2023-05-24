@@ -83,9 +83,9 @@ router.get('/me', requireUser, async (req, res, next) => {
 router.get('/:id/orders', requireUser, async (req, res, next) => {
   const { id } = req.params;
   try {
-    if(req.user && req.user.id === id) {
-      const allUserOrders = await getAllOrdersByUser(id);
-      res.send(allUserOrders.filter((userOrder) => userOrder.purchased === true));
+    if(req.user && req.user.id === +id) {
+      const allUserOrders = await getAllOrdersByUser(+id);
+      res.send(allUserOrders);
     } 
   } catch (error) {
     next(error);
