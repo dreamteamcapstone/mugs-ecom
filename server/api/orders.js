@@ -106,9 +106,8 @@ router.post('/:orderId/products', requireUser, async (req, res, next) => {
   router.get('/:orderId/products', requireUser, async (req, res, next) => {
     try {
       const { orderId } = req.params;
-  
-      const orderProducts = await getAllOrderProductsByOrder(orderId)
-      res.json(orderProducts);
+      const orderProducts = await getAllOrderProductsByOrder({id: orderId})
+      res.send(orderProducts);
     } catch (error) {
       next(error);
     }

@@ -137,7 +137,7 @@ const createInitialOrders = async () => {
     },
     {
       userId: 1,
-      purchased: true,
+      purchased: false,
     },
     {
       userId: 3,

@@ -33,7 +33,7 @@ const getOrderById = async (id) => {
           SELECT * FROM orders
           WHERE id = $1;
         `, [id]);
-    
+        
         return order;
       } catch (error) {
         console.error(error);
@@ -44,6 +44,7 @@ const getAllOrdersByUser = async (id) => {
     try {
         let orders = await getAllOrders();
         orders = orders.filter(order=> {return order.userId === id});
+        
         return orders;
         
     } catch (error) {

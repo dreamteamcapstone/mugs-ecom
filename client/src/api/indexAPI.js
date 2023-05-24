@@ -53,3 +53,43 @@ export const createUserOrder = async ({userId, purchased}, token) => {
   }
 }
 
+export const fetchOrderProducts = async (token, orderId) => {
+  try {
+    const response = await fetch(`api/orders/${orderId}/products`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch(error) {
+    console.error(error);
+  }
+}
+
+export const updateCartItem = async ({id, quantity, purchasePrice}) => {
+  try {
+    const response = await fetch(`api/order_products/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({quantity, purchasePrice})
+    });
+    const result = await response.json();
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const removeCartItem = async (id) => {
+  try {
+    const response = await fetch(`api/order_products/${id}`, {
+      method: "DELETE"
+    });
+    const result = await response.json();
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
