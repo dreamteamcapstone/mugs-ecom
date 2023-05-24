@@ -50,7 +50,7 @@ export const getMe = async (token) => {
     const response = await fetch(`api/users/me`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        'Authorization': `Bearer ${token}`,
       },
     });
     const result = await response.json();
