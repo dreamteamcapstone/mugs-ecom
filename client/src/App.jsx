@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom';
-import { Login, Register, Home, Navbar, Profile} from './components';
+import { Login, Register, Home, Navbar, Profile, SingleProduct } from './components';
 import { fetchAllProducts } from './api/indexAPI';
 //import { getMe } from './api/auth';
 
@@ -11,6 +11,7 @@ function App() {
   const [user, setUser] = useState({});
   const [token, setToken] = useState(localStorage.token);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -31,10 +32,11 @@ function App() {
     <div className="App">
       { <Navbar setUser={setUser} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} setToken={setToken} /> }
       <Routes>
-        <Route path="/" element={<Home  products={products} setProducts={setProducts} />} />
+        <Route path="/" element={<Home  products={products} setProducts={setProducts} setSelectedProduct={setSelectedProduct}/>} />
         <Route path='/login' element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}></Route>
         <Route path='/register' element={<Register setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}></Route>
         <Route path='/profile' element={<Profile token={token} user={user} isLoggedIn={isLoggedIn} />}></Route>
+        <Route path='/singleproduct' element={<SingleProduct selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct}/>}></Route>
       </Routes>
 
    
