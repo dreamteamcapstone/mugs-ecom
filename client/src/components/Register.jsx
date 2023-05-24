@@ -3,7 +3,7 @@ import { authenticateNewUser } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { createUserOrder } from "../api/indexAPI";
 
-const Register = ({setToken, setIsLoggedIn, setUser, user, token}) => {
+const Register = ({setToken, setIsLoggedIn, setUser, user, token, setCart}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -20,7 +20,8 @@ const Register = ({setToken, setIsLoggedIn, setUser, user, token}) => {
             setToken(data.token);
             setIsLoggedIn(true);
             setUser(data.user);
-            // const order = await createUserOrder({userId: user.id, purchased: false}, token)
+            const order = await createUserOrder({userId: data.user.id, purchased: false}, data.token);
+            setCart(order);
         } else { alert('That username is taken!') }
         setEmail("");
         setPassword("");

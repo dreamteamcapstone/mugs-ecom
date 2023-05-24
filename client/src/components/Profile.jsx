@@ -3,7 +3,7 @@ import {fetchUserOrders} from '../api/indexAPI'
 
 const Profile = ({isLoggedIn, user, token}) => {
     const [userOrders, setUserOrders] = useState([])
-    console.log(userOrders);
+    // console.log(userOrders);
     useEffect(() => {
         const getOrderHistory = async () => {
             const userPurchasedOrders = await fetchUserOrders(user, token);

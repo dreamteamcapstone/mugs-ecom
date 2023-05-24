@@ -12,6 +12,7 @@ function App() {
   const [token, setToken] = useState(localStorage.token);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState([]);
+  const [cart, setCart] = useState({});
 
   useEffect(() => {
     const getData = async () => {
@@ -34,7 +35,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home  products={products} setProducts={setProducts} setSelectedProduct={setSelectedProduct} />} />
         <Route path='/login' element={<Login user={user} setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}></Route>
-        <Route path='/register' element={<Register setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} user={user} token={token} />}></Route>
+        <Route path='/register' element={<Register setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} user={user} token={token} setCart={setCart} />}></Route>
         <Route path='/profile' element={<Profile token={token} user={user} isLoggedIn={isLoggedIn} />}></Route>
         <Route path='/singleproduct' element={<SingleProduct selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct}/>}></Route>
       </Routes>
