@@ -16,7 +16,8 @@ const Home = ( { products, setSelectedProduct, selectedProduct } ) => {
              }}>
                <h2>{product.name}</h2>
                <h3>{product.price}</h3>
-               <em>{product.imageUrl}</em>
+               {/* <em>{product.imageUrl}</em> */}
+               <img src={product.imageUrl} alt="https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg" />
             </div>
           )
          })
