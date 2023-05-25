@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 //import './App.css'
 import { Route, Routes } from 'react-router-dom';
-import { Login, Register, Home, Navbar, Profile, SingleProduct, Cart } from './components';
+import { Login, Register, Home, Navbar, Profile, SingleProduct, Cart, Admin } from './components';
 import { fetchAllProducts, fetchUserOrders } from './api/indexAPI';
 import { getMe } from './api/auth';
 
@@ -64,7 +64,7 @@ function App() {
         <Route path='/profile' element={<Profile token={token} user={user} isLoggedIn={isLoggedIn} />}></Route>
         <Route path='/singleproduct' element={<SingleProduct selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct} cart={cart} setCart={setCart} token={token} />}></Route>
         <Route path='/cart' element={<Cart cart={cart} token={token} user={user} setCart={setCart} />}></Route>
-
+        <Route path='/admin' element={<Admin user={user} token={token} setProducts={setProducts} />}></Route>
       </Routes>
 
    

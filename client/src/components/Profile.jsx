@@ -18,19 +18,21 @@ const Profile = ({isLoggedIn, user, token}) => {
         {isLoggedIn ? 
         (<div className="profile">
             <h2>Your Account Info</h2>
-            <ul>
+            <ul className="persInfo"> 
+                <li>Name:{user.firstName} {user.lastName}</li>
                 <li>Email: {user.email}</li>
-                <li>Address: {user.address}</li>
+                <li>Shipping Address: {user.address}</li>
                 <li>Phone: {user.phoneNumber}</li>
             </ul>
-            <h3>Your Order History:</h3>
+            <h2>Your Order History:</h2>
+            <div className="orders">
             {userOrders.map((order) => {
                 return(
-                    <div key={order.id}>
+                    <div className="order" key={order.id}>
                         <h5>Order#: {order.id}</h5>
                         {order.products.map((product) => {
                             return(
-                                <div className="order"key={product.id}>
+                                <div className="product" key={product.id}>
                                     <ul>
                                         <li>Item: {product.name}</li>
                                         <li>Qty: {product.quantity}</li>
@@ -41,7 +43,7 @@ const Profile = ({isLoggedIn, user, token}) => {
                         })}
                     </div>
                 )
-            })}
+            })}</div>
         </div>) 
         : 
         (<>

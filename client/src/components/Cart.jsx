@@ -5,7 +5,7 @@ import {
   updateCartItem,
   removeCartItem,
 } from "../api/indexAPI";
-
+import "./Cart.css";
 const Cart = ({ cart, token, setCart, user }) => {
   const [items, setItems] = useState([]);
   //useEffect for dependency on cart
@@ -40,13 +40,12 @@ const Cart = ({ cart, token, setCart, user }) => {
       {items &&
         items.map((product) => {
           return (
-            <div key={product.id}>
-              <ul className="lineItem">
+            <div className="product-container" key={product.id}>
+              <ul className="lineItems">
                 <li>{product.productId}</li>
-                <li>Qty:{product.quantity}</li>
                 <li>{product.purchasePrice}</li>
-              </ul>
-              <input
+                <li>Qty:{product.quantity}</li>
+              <li><input
                 onChange={async function handleQuantity(event, product) {
                   console.log(product);
                   const totalItemPrice =
@@ -70,8 +69,8 @@ const Cart = ({ cart, token, setCart, user }) => {
                 placeholder={product.quantity}
                 min="1"
                 max="5"
-              />
-              <button
+              /></li>
+              <li><button
                 onClick={async () => {
                   console.log(product.id);
                   const deletedItem = await removeCartItem(product.id);
@@ -87,10 +86,13 @@ const Cart = ({ cart, token, setCart, user }) => {
                 }}
               >
                 Remove From Cart
-              </button>
-            </div>
+              </button></li>
+              </ul>
+              </div>
           );
         })}
+        <h3 className="total">Total: $</h3>
+        <button className="checkoutBtn">Checkout</button>
     </div>
   );
 };

@@ -74,10 +74,10 @@ router.get('/:name', async (req, res, next) => {
 
 //Create A New Product
 router.post('/', requireUser, async (req, res, next) => {
-    const { description, name, imageUrl, price, inventory } = req.body
-    
+    const { name, description, imageUrl, price, inventory } = req.body
+    console.log(req.body)
     const takenProduct = await getProductByName(name);
-
+    console.log(takenProduct);
     if (takenProduct) {
       next({
         name: "Error Creating Product",
@@ -85,7 +85,8 @@ router.post('/', requireUser, async (req, res, next) => {
       });
     } else {
         try {
-          const newProduct = await createProduct({description, name, imageUrl, price, inventory});
+          const newProduct = await createProduct({name, description, imageUrl, price, inventory});
+          console.log(newProduct);
           res.send(
              newProduct
          );
