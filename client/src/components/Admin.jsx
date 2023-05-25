@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { createProduct } from '../api/indexAPI';
+import { createProduct, deleteProduct } from '../api/indexAPI';
 
 const Admin = ({user, token, setProducts}) => {
 const [productId, setProductId] = useState(0);
@@ -21,6 +21,8 @@ const handleEdit = async (event) => {
 
 const handleDelete = async (event) => {
     event.preventDefault()
+    const product = await deleteProduct(productId, token)
+    console.log("Deleted product:", product);
 }
     return(
         <>
@@ -44,7 +46,7 @@ const handleDelete = async (event) => {
                 <button type="submit">Edit Product</button>
             </form>
             <form onSubmit={handleDelete}>
-            <input type="number"/>
+            <input type="number" value={productId} onChange={(event) => setProductId(event.target.value)}/>
             <button type="submit">Delete Product</button>
             </form>
         </div>)
