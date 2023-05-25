@@ -20,14 +20,14 @@ function App() {
       setProducts(fetchedProducts);
       if(token) {
         const me = await getMe(token);
-        // console.log(me);  
+        console.log("User;", me);  
         setUser(me);
         setIsLoggedIn(true);
         const userOrders = await fetchUserOrders(me, token);
-        console.log(userOrders);
+        // console.log(userOrders);
         const openOrder = userOrders.find(order => order.purchased === false);
         // console.log("hi", userOrders.find(order => order.purchased === false));
-        console.log(openOrder)
+        console.log("Cart:", openOrder)
         setCart(openOrder);
       }
     }
@@ -38,25 +38,25 @@ function App() {
     const getUserData = async() => {
       if(token) {
         const me = await getMe(token);
-        // console.log(me);  
+        console.log("User:", me);  
         setUser(me);
         setIsLoggedIn(true);
         const userOrders = await fetchUserOrders(me, token);
-        console.log(userOrders);
+        // console.log(userOrders);
         const openOrder = userOrders.find(order => order.purchased === false);
         // console.log("hi", userOrders.find(order => order.purchased === false));
-        console.log(openOrder)
+        console.log("Cart:", openOrder)
         setCart(openOrder);
       }
     }
     getUserData();
   }, [token])
-
-console.log(cart);
+  // console.log("Cart:", cart);
+  
   return (
-
+    
     <div className="App">
-      { <Navbar user={user} setUser={setUser} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} setToken={setToken} /> }
+      { <Navbar user={user} setUser={setUser} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} setToken={setToken} setCart={setCart}/> }
       <Routes>
         <Route path="/" element={<Home  products={products} setProducts={setProducts} setSelectedProduct={setSelectedProduct} />} />
         <Route path='/login' element={<Login user={user} setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}></Route>

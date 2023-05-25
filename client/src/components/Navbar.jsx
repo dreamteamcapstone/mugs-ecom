@@ -1,7 +1,9 @@
 import React from "react";
 import { NavLink } from 'react-router-dom';
+
+const Navbar = ({ user, setUser, setIsLoggedIn, isLoggedIn, setToken, setCart }) => {
 import "./Home.css"
-const Navbar = ({ user, setUser, setIsLoggedIn, isLoggedIn, setToken }) => {
+
     return (
         <>
         {isLoggedIn ? (
@@ -17,6 +19,7 @@ const Navbar = ({ user, setUser, setIsLoggedIn, isLoggedIn, setToken }) => {
                     setIsLoggedIn(false)
                     setUser({})
                     setToken("")
+                    setCart({})
                     localStorage.removeItem("token")
                 }}>Logout</NavLink>
                 </div>

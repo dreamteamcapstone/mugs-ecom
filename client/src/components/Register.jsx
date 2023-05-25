@@ -15,7 +15,7 @@ const Register = ({setToken, setIsLoggedIn, setUser, user, token, setCart}) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = await authenticateNewUser({email: email, password: password, firstName: firstName, lastName: lastName, address: address, phoneNumber: phoneNumber});
-        console.log(data)
+        // console.log(data)
         if(data.token) {
             setToken(data.token);
             setIsLoggedIn(true);
