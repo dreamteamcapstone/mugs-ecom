@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { authenticateUser } from "../api/auth";
 import { NavLink, useNavigate } from "react-router-dom";
-
+import "./Login.css"
 const Login = ({user, setToken, setIsLoggedIn, setUser}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

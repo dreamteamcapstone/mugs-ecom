@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react'
-import './App.css'
+//import './App.css'
 import { Route, Routes } from 'react-router-dom';
 import { Login, Register, Home, Navbar, Profile, SingleProduct, Cart } from './components';
 import { fetchAllProducts, fetchUserOrders } from './api/indexAPI';
@@ -63,7 +63,7 @@ function App() {
         <Route path='/register' element={<Register setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} user={user} token={token} setCart={setCart} />}></Route>
         <Route path='/profile' element={<Profile token={token} user={user} isLoggedIn={isLoggedIn} />}></Route>
         <Route path='/singleproduct' element={<SingleProduct selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct} cart={cart} setCart={setCart} token={token} />}></Route>
-        <Route path='/cart' element={<Cart cart={cart} token={token} user={user}/>}></Route>
+        <Route path='/cart' element={<Cart cart={cart} token={token} user={user} setCart={setCart} />}></Route>
 
       </Routes>
 

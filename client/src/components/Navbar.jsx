@@ -2,26 +2,27 @@ import React from "react";
 import { NavLink } from 'react-router-dom';
 
 const Navbar = ({ user, setUser, setIsLoggedIn, isLoggedIn, setToken, setCart }) => {
+import "./Home.css"
+
     return (
         <>
         {isLoggedIn ? (
 
             <nav className='navbar'>
             <h1 className='title'>Mugs-A-Million</h1>
-            <div>
-                <p>Hello, <NavLink to="/profile">{user.firstName}</NavLink></p>
-                <NavLink to="/">Home</NavLink>
-                {/* <NavLink to="/profile">My Profile</NavLink> */}
-                {/* which way do you guys prefer to show the profile link? line 12 or 14? */}
-                <NavLink to="/cart">Cart</NavLink>
-                <NavLink to="/" onClick={() => {
+                {/* s<p>Hello, <NavLink to="/profile">{user.firstName}</NavLink></p> */}
+                <div className="links">
+                    <NavLink to="/">Home</NavLink>
+                    <NavLink to="/cart">Cart</NavLink>
+                    <NavLink to="/profile">Profile</NavLink>
+                    <NavLink to="/" onClick={() => {
                     setIsLoggedIn(false)
                     setUser({})
                     setToken("")
                     setCart({})
                     localStorage.removeItem("token")
                 }}>Logout</NavLink>
-            </div>
+                </div>
             </nav>
 
         ) : (

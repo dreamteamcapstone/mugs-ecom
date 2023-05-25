@@ -48,7 +48,11 @@ async function getAllOrderProductsByOrder({ id }) {
         FROM order_products
         WHERE "orderId"=$1
         `, [id]);
+        if(order_products){
         return order_products
+        } else {
+          return;
+        }
       } catch (error) {
         throw error
       }
