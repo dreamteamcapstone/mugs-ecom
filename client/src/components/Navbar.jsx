@@ -4,7 +4,6 @@ import "./Home.css"
 
 const Navbar = ({ user, setUser, setIsLoggedIn, isLoggedIn, setToken, setCart }) => {
 
-
     return (
         <>
         {isLoggedIn ? (

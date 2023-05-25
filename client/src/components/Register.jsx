@@ -37,20 +37,29 @@ const Register = ({setToken, setIsLoggedIn, setUser, user, token, setCart}) => {
         <div className="register">
         <h2>Register</h2>
         <form onSubmit={handleSubmit} className="registerForm">
-            <input
-            type="email" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value.toLowerCase())}
-            required
-            ></input>
-            <input
-            minLength='8' placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)}
-            required
-            ></input>
-            <input
-            placeholder="First Name" value={firstName} onChange={(event) => setFirstName(event.target.value)}
-            ></input>
-            <input
-            placeholder="Last Name" value={lastName} onChange={(event) => setLastName(event.target.value)}
-            ></input>
+            <div>
+                <p>Email</p>
+                <input
+                type="email" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value.toLowerCase())}
+                required
+                ></input>
+            </div>
+            <div>
+                <p>Password</p>
+                <input
+                minLength='8' placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)}
+                required
+                ></input>
+            </div>
+            <div>
+                <p>Personal Info</p>
+                <input
+                placeholder="First Name" value={firstName} onChange={(event) => setFirstName(event.target.value)}
+                ></input>
+                <input
+                placeholder="Last Name" value={lastName} onChange={(event) => setLastName(event.target.value)}
+                ></input>
+            </div>
             <input
             placeholder="Address" value={address} onChange={(event) => setAddress(event.target.value)}
             ></input>
