@@ -1,6 +1,38 @@
 .profile {
     display: flex;
     flex-direction: column;
-    align-items:center;
+
+    width: 100vw;
+}
+ h2 {
+    margin: 5vw;
+ }
+ .persInfo {
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    width:400px;
+    margin-left: 10vw;
+    padding: 10px;
+ }
+
+.orders {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
     width: 90vw;
+    margin-left: 5vw;
+}
+.order {
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    width: 200px;
+
+}
+
+.product {
+    
+}
+.product:nth-child(even) {
+    background-color: rgb(235, 235, 235);
+    width: 100%;
 }

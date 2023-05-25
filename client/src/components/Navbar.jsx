@@ -1,8 +1,9 @@
 import React from "react";
 import { NavLink } from 'react-router-dom';
+import "./Home.css"
 
 const Navbar = ({ user, setUser, setIsLoggedIn, isLoggedIn, setToken, setCart }) => {
-import "./Home.css"
+
 
     return (
         <>

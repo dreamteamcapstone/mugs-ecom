@@ -90,10 +90,14 @@ export const fetchOrderProducts = async (token, orderId) => {
   }
 }
 
-export const updateCartItem = async ({id, quantity, purchasePrice}) => {
+export const updateCartItem = async (token, {id, quantity, purchasePrice}) => {
   try {
     const response = await fetch(`api/order_products/${id}`, {
       method: "PATCH",
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${token}`
+     },
       body: JSON.stringify({quantity, purchasePrice})
     });
     const result = await response.json();
@@ -104,7 +108,7 @@ export const updateCartItem = async ({id, quantity, purchasePrice}) => {
   }
 }
 
-export const removeCartItem = async (id) => {
+export const removeCartItem = async (token, id) => {
 
   try {
     const response = await fetch(`api/order_products/${id}`, {
@@ -114,6 +118,61 @@ export const removeCartItem = async (id) => {
     console.log(result);
     return result;
   } catch (error) {
+    console.error(error);
+  }
+}
+
+export const deleteProduct = async (id) => {
+  try {
+    const response = await fetch(`api/products/${id}`, {
+      method: "DELETE",
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${token}`
+     },
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const editProduct = async (token, {id, name, description, imageUrl, price, inventory}) => {
+  try {
+    const response = await fetch(`api/products/${id}`, {
+      method: "PATCH",
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${token}`
+     },
+     body: JSON.stringify({name, description, imageUrl, price, inventory})
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const createProduct = async (token, {name, description, imageUrl, price, inventory}) => {
+  try {
+    console.log("hello from createProduct", {name, description, imageUrl, price, inventory})
+    const response = await fetch(`api/products`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({name, description, imageUrl, price, inventory})
+    });
+    console.log(response);
+    const result = await response.json();
+    console.log(result);
+    return result;
+  }catch(error) {
     console.error(error);
   }
 }
