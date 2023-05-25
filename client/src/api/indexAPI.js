@@ -9,7 +9,7 @@ export const fetchAllProducts = async () => {
         'Content-Type': 'application/json',
        }, 
     });
-
+    
     const result = await response.json()
     
     return result;
@@ -55,9 +55,9 @@ export const createUserOrder = async ({userId, purchased}, token) => {
   }
 }
 
-export const addProductToOrder = async (token, orderId , {productId, quantity, purchasePrice}) => {
+export const addProductToOrder = async ( token, orderId , {productId, quantity, purchasePrice} ) => {
   try {
-     const response = await fetch(`api/${orderId}/products`, {
+     const response = await fetch(`api/orders/${orderId}/products`, {
        method: "POST",
        headers: {
           'Content-type': 'application/json',

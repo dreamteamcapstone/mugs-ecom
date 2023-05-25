@@ -2,18 +2,18 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { addProductToOrder } from "../api/indexAPI";
 
-const SingleProduct = ({ selectedProduct, token , cart}) => {
+const SingleProduct = ({ selectedProduct, token , cart, setCart}) => {
   const navigate = useNavigate();
-  console.log(cart)
+  console.log("Cart:", cart)
+
   const addToCart = async (event) => {
     const product = await addProductToOrder(token, cart.id, {productId: selectedProduct.id, quantity: 1, purchasePrice: selectedProduct.price})
     console.log("Data from addTOCart:", cart.id)
-    
+    console.log("Added Product:", product)
   }
      
      if(selectedProduct.inventory > 0){
-        console.log("Inventory:",selectedProduct.inventory)
-         
+        
          return (
              <>
                 <div>
