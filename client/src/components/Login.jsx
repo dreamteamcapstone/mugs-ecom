@@ -9,8 +9,8 @@ const Login = ({user, setToken, setIsLoggedIn, setUser}) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = await authenticateUser({email: email, password: password});
-        console.log(data);
-        console.log(data.user);
+        // console.log(data);
+        // console.log(data.user);
         if(data.token) {
             setToken(data.token);
             setIsLoggedIn(true);
