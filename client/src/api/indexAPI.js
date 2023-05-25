@@ -98,18 +98,21 @@ export const updateCartItem = async ({id, quantity, purchasePrice}) => {
     });
     const result = await response.json();
     console.log(result);
+    return result;
   } catch (error) {
     console.error(error);
   }
 }
 
 export const removeCartItem = async (id) => {
+
   try {
     const response = await fetch(`api/order_products/${id}`, {
       method: "DELETE"
     });
     const result = await response.json();
     console.log(result);
+    return result;
   } catch (error) {
     console.error(error);
   }

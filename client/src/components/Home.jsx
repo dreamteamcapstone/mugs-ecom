@@ -1,22 +1,24 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import './Home.css'
 const Home = ( { products, setSelectedProduct, selectedProduct } ) => {
   const navigate = useNavigate();
     return (
-        <>
+        <div className="grid-container">
         
 
        {products.length ? (
          products.map(( product ) => {
           return (
-            <div key={product.id} onClick={() => {
+            <div className="product-tile"key={product.id} onClick={() => {
               setSelectedProduct(product)
               navigate('/singleproduct')
              }}>
-               <h2>{product.name}</h2>
-               <h3>{product.price}</h3>
-               <em>{product.imageUrl}</em>
+              <img src={product.imageUrl}/>
+              <div className="product-name">
+                <h3>{product.name}</h3>
+                <h3>{product.price}</h3>
+              </div>
             </div>
           )
          })
@@ -24,12 +26,9 @@ const Home = ( { products, setSelectedProduct, selectedProduct } ) => {
           <h1> .... Loading Products</h1>
        )
     }
-        </>
+        </div>
     );
 };
-
-
-
 
 
 export default Home;

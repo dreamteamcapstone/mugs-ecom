@@ -20,13 +20,12 @@ router.patch("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
     try {
         const {id} = req.params;
-        const orderProduct = await destroyOrderProduct(id);
+        const orderProduct = await destroyOrderProduct(+id);
         res.send(orderProduct);
     } catch (error) {
         next(error)
     }
 });
-
 
 
 module.exports = router;

@@ -17,11 +17,10 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart}) => {
          return (
              <>
                 <div>
-                   <h1>{selectedProduct.name}</h1>
+                   <h2>{selectedProduct.name}</h2>
                    <p>{selectedProduct.description}</p>
-                   <p>{selectedProduct.imageUrl}</p>
+                   <img src={selectedProduct.imageUrl}/>
                    <p>{selectedProduct.price}</p>
-                   
                 </div>
              
                 <button onClick= { addToCart }>Add to Cart</button>
@@ -38,7 +37,7 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart}) => {
                <div>
                   <h1>{selectedProduct.name}</h1>
                   <p>{selectedProduct.description}</p>
-                  <p>{selectedProduct.imageUrl}</p>
+                  <img src={selectedProduct.imageUrl}/>
                   <p>{selectedProduct.price}</p>
                   
                </div>
