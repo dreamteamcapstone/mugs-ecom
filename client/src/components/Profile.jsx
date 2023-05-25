@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import {fetchUserOrders} from '../api/indexAPI'
-
+import "./Profile.css"
 const Profile = ({isLoggedIn, user, token}) => {
     const [userOrders, setUserOrders] = useState([])
     // console.log(userOrders);
@@ -16,7 +16,7 @@ const Profile = ({isLoggedIn, user, token}) => {
     return (
         <>
         {isLoggedIn ? 
-        (<>
+        (<div className="profile">
             <h2>Your Account Info</h2>
             <ul>
                 <li>Email: {user.email}</li>
@@ -27,14 +27,14 @@ const Profile = ({isLoggedIn, user, token}) => {
             {userOrders.map((order) => {
                 return(
                     <div key={order.id}>
-                        <h5>{order.id}</h5>
+                        <h5>Order#: {order.id}</h5>
                         {order.products.map((product) => {
                             return(
-                                <div key={product.id}>
+                                <div className="order"key={product.id}>
                                     <ul>
-                                        <li>{product.name}</li>
-                                        <li>{product.quantity}</li>
-                                        <li>{product.purchasePrice}</li>
+                                        <li>Item: {product.name}</li>
+                                        <li>Qty: {product.quantity}</li>
+                                        <li>Price: {product.purchasePrice}</li>
                                     </ul>
                                 </div>
                             )
@@ -42,7 +42,7 @@ const Profile = ({isLoggedIn, user, token}) => {
                     </div>
                 )
             })}
-        </>) 
+        </div>) 
         : 
         (<>
             <h1>You need to be logged in to view your profile</h1>

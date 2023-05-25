@@ -1,0 +1,31 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 50px;
+  width: 90vw;
+  margin-left: 5vw;
+}
+.product-tile {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  padding: 20px;
+  font-size: 15px;
+}
+
+.product-tile img {
+  height: 150px;
+  transition: transform 1s;
+}
+
+.product-tile:hover {
+    box-shadow: 0 3px 15px rgb(0 0 0 / 0.3);
+}
+.product-name {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-weight: 900;
+}
