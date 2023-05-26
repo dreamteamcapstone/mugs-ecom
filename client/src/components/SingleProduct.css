@@ -33,3 +33,16 @@
     margin-left: 10px;
     
 }
+
+.productView {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.productInfo {
+    width:;
+}
+
+.price {
+    margin-bottom: 50px;
+}

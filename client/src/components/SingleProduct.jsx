@@ -36,12 +36,20 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
   if(user.admin){
    if(selectedProduct.inventory > 0){    
       return (
-          <>
+         <>
              <div>
+                  <button onClick={() => {
+                  navigate('/')
+                  }}>Back</button>
                 <h2>{selectedProduct.name}</h2>
-                <p>{selectedProduct.description}</p>
+                <div className="productView">
                 <img src={selectedProduct.imageUrl} height="500" width="500"/>
-                <p>{selectedProduct.price}</p>
+                <div className="productInfo">
+                <p className="price">{selectedProduct.price}</p>
+                <p>About this item <br />{selectedProduct.description}</p>
+             <button onClick= { addToCart }>Add to Cart</button>
+                </div>
+                </div>
              </div>
 
              <form className="editForm" onSubmit={handleEdit}>Edit Product
@@ -68,28 +76,50 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
                 <button type="submit">Submit</button>
             </form>
           
-             <button onClick= { addToCart }>Add to Cart</button>
 
-             <button onClick={() => {
-             navigate('/')
-             }}>X</button>
           </>
       )
   } else {
      return (
          <>
             <div>
-               <h1>{selectedProduct.name}</h1>
-               <p>{selectedProduct.description}</p>
-               <img src={selectedProduct.imageUrl}/>
-               <p>{selectedProduct.price}</p>
-               
-            </div>
-         
-            <button>Out Of Stock</button>
-            <button onClick={() => {
-             navigate('/')
-             }}>X</button>
+                  <button onClick={() => {
+                  navigate('/')
+                  }}>Back</button>
+                <h2>{selectedProduct.name}</h2>
+                <div className="productView">
+                <img src={selectedProduct.imageUrl} height="500" width="500"/>
+                <div className="productInfo">
+                <p className="price">{selectedProduct.price}</p>
+                <p>About this item <br />{selectedProduct.description}</p>
+             <button>Out of Stock</button>
+                </div>
+                </div>
+             </div>
+
+             <form className="editForm" onSubmit={handleEdit}>Edit Product
+             <div className="formInput">
+               <label>Product Name</label>
+                <input placeholder="name" value={productName} onChange={(event) => setProductName(event.target.value)}/>
+             </div>
+             <div className="formInput">
+               <label>Description</label>
+                <input placeholder="description" value={productDesc} onChange={(event) => setProductDesc(event.target.value)}/>
+             </div>
+             <div className="formInput">
+               <label>Image URL</label>
+                <input placeholder="imageUrl" value={productImage} onChange={(event) => setProductImage(event.target.value)}/>
+             </div>
+             <div className="formInput">
+               <label>Price</label>
+                <input placeholder="price" value={productPrice} onChange={(event) => setProductPrice(event.target.value)}/>
+             </div>
+             <div className="formInput">
+               <label>Inventory Count</label>
+                <input placeholder="inventory" value={productInventory} type="number" onChange={(event) => setProductInventory(event.target.value)}/>
+             </div>
+                <button type="submit">Submit</button>
+            </form>
          </>
      )
   }
@@ -98,34 +128,38 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
       return (
           <>
              <div>
+                  <button onClick={() => {
+                  navigate('/')
+                  }}>Back</button>
                 <h2>{selectedProduct.name}</h2>
-                <p>{selectedProduct.description}</p>
-                <img src={selectedProduct.imageUrl}/>
-                <p>{selectedProduct.price}</p>
-             </div>
-          
+                <div className="productView">
+                <img src={selectedProduct.imageUrl} height="500" width="500"/>
+                <div className="productInfo">
+                <p className="price">{selectedProduct.price}</p>
+                <p>About this item <br />{selectedProduct.description}</p>
              <button onClick= { addToCart }>Add to Cart</button>
-
-             <button onClick={() => {
-             navigate('/')
-             }}>X</button>
+                </div>
+                </div>
+             </div>
           </>
       )
   } else {
      return (
          <>
             <div>
-               <h1>{selectedProduct.name}</h1>
-               <p>{selectedProduct.description}</p>
-               <img src={selectedProduct.imageUrl}/>
-               <p>{selectedProduct.price}</p>
-               
-            </div>
-         
-            <button>Out Of Stock</button>
-            <button onClick={() => {
-             navigate('/')
-             }}>X</button>
+                  <button onClick={() => {
+                  navigate('/')
+                  }}>Back</button>
+                <h2>{selectedProduct.name}</h2>
+                <div className="productView">
+                <img src={selectedProduct.imageUrl} height="500" width="500"/>
+                <div className="productInfo">
+                <p className="price">{selectedProduct.price}</p>
+                <p>About this item <br />{selectedProduct.description}</p>
+             <button>Out of Stock</button>
+                </div>
+                </div>
+             </div>
          </>
      )
   }
