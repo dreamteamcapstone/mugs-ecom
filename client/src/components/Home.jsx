@@ -17,7 +17,14 @@ const Home = ( { products, setSelectedProduct, selectedProduct, user, token, set
       setProducts(fetchedProducts);
     }
     getData();
-  }, [products])
+  }, [products.length])
+
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     console.log(productId);
+  //   }
+  //   getData();
+  // }, [productId])
 
   const handleCreate = async (event) => {
     event.preventDefault();
@@ -43,25 +50,34 @@ const handleDelete = async (event) => {
                 <input placeholder="name" type="text" value={productName} onChange={(event) => setProductName(event.target.value)}/>
                 <input placeholder="description" type="text" value={productDesc} onChange={(event) => setProductDesc(event.target.value)}/>
                 <input placeholder="imageUrl" type="text" value={productImage} onChange={(event) => setProductImage(event.target.value)}/>
-                <input placeholder="price" type="text" data-type="currency" value={productPrice} onChange={(event) => setProductPrice(event.target.value)}/>
+                <input placeholder="price(dosen't need .00 after" type="text" data-type="currency" value={productPrice} onChange={(event) => setProductPrice(event.target.value)}/>
                 <input placeholder="inventory" type="number" value={productInventory} onChange={(event) => setProductInventory(event.target.value)}/>
                 <button type="submit">Submit</button>
             </form>
        {products.length ? (
          products.map(( product ) => {
           return (
-            <div className="product-tile"key={product.id} onClick={() => {
+            <article key={product.id}>
+            <div className="product-tile" onClick={() => {
               setSelectedProduct(product)
               navigate('/singleproduct')
-             }}>
+            }}>
               <img src={product.imageUrl}/>
               <div className="product-name">
                 <h3>{product.name}</h3>
                 <h3>{product.price}</h3>
               </div>
-                <button>Edit Product</button>
-                <button  value={productId} onMouseEnter={(event) => setProductId(event.target.value)} onClick={handleDelete}>Delete Product</button>
             </div>
+            {/* <div className="checkboxRow">
+                <p>Check box before deleting</p>
+                <input type="checkbox" onClick={(event) => setProductId(event.target.value)}></input>
+            </div> */}
+            <div className="buttonRow"  >
+                <button  value={product.id} onClick={(event) => setProductId(event.target.value)}>Delete This Product</button>
+                <button onClick={handleDelete}>DELETE!</button>
+                <button>Edit Product</button>
+            </div>
+               </article>
           )
          })
        ):(

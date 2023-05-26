@@ -29,3 +29,10 @@
 .title {
   font-weight: 900;
 }
+
+.buttonRow {
+  display: flex;
+}
+.checkboxRow {
+  display: flex;
+}
