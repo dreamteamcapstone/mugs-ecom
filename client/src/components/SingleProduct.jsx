@@ -40,7 +40,7 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
              <div>
                 <h2>{selectedProduct.name}</h2>
                 <p>{selectedProduct.description}</p>
-                <img src={selectedProduct.imageUrl} height="300" width="300"/>
+                <img src={selectedProduct.imageUrl} height="500" width="500"/>
                 <p>{selectedProduct.price}</p>
              </div>
 
