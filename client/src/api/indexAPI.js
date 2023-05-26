@@ -122,9 +122,9 @@ export const removeCartItem = async (token, id) => {
   }
 }
 
-export const deleteProduct = async (productId, token) => {
+export const deleteProduct = async (token, id) => {
   try {
-    const response = await fetch(`api/products/${productId}`, {
+    const response = await fetch(`api/products/${id}`, {
       method: "DELETE",
       headers: {
         'Content-type': 'application/json',

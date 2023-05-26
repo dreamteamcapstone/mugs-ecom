@@ -37,7 +37,6 @@ const handleDelete = async (event) => {
                 <button type="submit">Add New Product</button>
             </form>
             <form onSubmit={handleEdit}>
-                <input type="number" />
                 <input id="name" type="text" />
                 <input id="description" type="text" />
                 <input id="imageUrl" type="text" />
