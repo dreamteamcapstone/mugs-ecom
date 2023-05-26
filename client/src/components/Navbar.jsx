@@ -14,7 +14,7 @@ const Navbar = ({ user, setUser, setIsLoggedIn, isLoggedIn, setToken, setCart })
                 <div className="links">
                     <NavLink to="/">Home</NavLink>
                     <NavLink to="/cart">Cart</NavLink>
-                    <NavLink to="/profile">Profile</NavLink>
+                    <NavLink to="/profile">Account</NavLink>
                     <NavLink to="/" onClick={() => {
                     setIsLoggedIn(false)
                     setUser({})
