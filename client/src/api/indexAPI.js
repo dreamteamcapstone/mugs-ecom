@@ -90,15 +90,25 @@ export const fetchOrderProducts = async (token, orderId) => {
   }
 }
 
-export const updateCartItem = async (token, {id, quantity, purchasePrice}) => {
+// export const updateCartItem = async ({id, quantity, purchasePrice}) => {
+//   console.log(quantity);
+//   try {
+//     const response = await fetch(`api/order_products/${id}`, {
+//       method: "PATCH",
+//       body: JSON.stringify({quantity, purchasePrice})
+//     });
+//     const result = await response.json();
+//     console.log(result);
+//     return result;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
+export const updateCartItem = async ({id, quantity, purchasePrice}) => {
   try {
     const response = await fetch(`api/order_products/${id}`, {
       method: "PATCH",
-      headers: {
-        'Content-type': 'application/json',
-        'Authorization': `Bearer ${token}`
-     },
-      body: JSON.stringify({quantity, purchasePrice})
+     body: JSON.stringify({quantity, purchasePrice})
     });
     const result = await response.json();
     console.log(result);
@@ -108,7 +118,7 @@ export const updateCartItem = async (token, {id, quantity, purchasePrice}) => {
   }
 }
 
-export const removeCartItem = async (token, id) => {
+export const removeCartItem = async (id) => {
 
   try {
     const response = await fetch(`api/order_products/${id}`, {
@@ -122,7 +132,9 @@ export const removeCartItem = async (token, id) => {
   }
 }
 
+
 export const deleteProduct = async (token, id) => {
+
   try {
     const response = await fetch(`api/products/${id}`, {
       method: "DELETE",
@@ -176,3 +188,22 @@ export const createProduct = async (token, {name, description, imageUrl, price, 
     console.error(error);
   }
 }
+
+export const editOrder = async (token, {orderId, userId, purchased}) => {
+  try {
+    const response = await fetch(`api/orders/${orderId}`, {
+      method: "PATCH",
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${token}`
+     },
+     body: JSON.stringify({userId, purchased})
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+

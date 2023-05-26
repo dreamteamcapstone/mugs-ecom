@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./SingleProduct.css"
 import { addProductToOrder, editProduct } from "../api/indexAPI";
 
 const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
@@ -11,10 +12,12 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
    const navigate = useNavigate();
    console.log("Cart:", cart)
 
+
   const addToCart = async (event) => {
     const product = await addProductToOrder(token, cart.id, {productId: selectedProduct.id, quantity: 1, purchasePrice: selectedProduct.price})
     console.log("Data from addTOCart:", cart.id)
     console.log("Added Product:", product)
+    navigate('/cart')
   }
 
   const handleEdit = async (event) => {
@@ -105,6 +108,7 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
      )
   }
   }
+
 }
 
 

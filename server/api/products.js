@@ -75,9 +75,7 @@ router.get('/:name', async (req, res, next) => {
 //Create A New Product
 router.post('/', requireUser, async (req, res, next) => {
     const { name, description, imageUrl, price, inventory } = req.body
-    console.log(req.body)
     const takenProduct = await getProductByName(name);
-    console.log(takenProduct);
     if (takenProduct) {
       next({
         name: "Error Creating Product",
@@ -96,7 +94,6 @@ router.post('/', requireUser, async (req, res, next) => {
   }
 });
 
-//Getting error "column "imageUrl" of relation "products" does not exist"
 //Update A Product
 router.patch('/:productId', requireUser, async (req, res, next) => {
     const { description, name, imageUrl, price, inventory } = req.body
@@ -115,7 +112,6 @@ router.patch('/:productId', requireUser, async (req, res, next) => {
         
         const updatedProduct = await updateProduct(productId, 
             {description,
-
             name,
             imageUrl,
             price,
