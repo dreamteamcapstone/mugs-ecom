@@ -36,11 +36,7 @@
 
 .productView {
     display: flex;
-    justify-content: space-evenly;
-}
-
-.productInfo {
-    width:;
+    justify-content: space-around;
 }
 
 .price {

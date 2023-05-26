@@ -32,12 +32,13 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
    const updatedProduct = await editProduct(token, {id: selectedProduct.id, name: productName, description: productDesc, imageUrl: productImage, price: productPrice, inventory: productInventory})
    console.log("Updated Product:", updatedProduct)
 }
-
+// QUESTION: if not logged in don't let people see the add to cart button, maybe instead have the button say "login to make purchases"
   if(user.admin){
    if(selectedProduct.inventory > 0){    
       return (
          <>
              <div>
+               {/* QUESTION: do we need these buttons that navigate to home if the home button in navbar already does that? */}
                   <button onClick={() => {
                   navigate('/')
                   }}>Back</button>
@@ -47,7 +48,7 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
                 <div className="productInfo">
                 <p className="price">{selectedProduct.price}</p>
                 <p>About this item <br />{selectedProduct.description}</p>
-             <button onClick= { addToCart }>Add to Cart</button>
+                <button onClick= {() =>{ addToCart; navigate("/cart") }}>Add to Cart</button>
                 </div>
                 </div>
              </div>
