@@ -108,6 +108,9 @@ export const updateCartItem = async ({id, quantity, purchasePrice}) => {
   try {
     const response = await fetch(`api/order_products/${id}`, {
       method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json'
+      },
      body: JSON.stringify({quantity, purchasePrice})
     });
     const result = await response.json();
