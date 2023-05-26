@@ -58,11 +58,11 @@ function App() {
     <div className="App">
       { <Navbar user={user} setUser={setUser} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} setToken={setToken} setCart={setCart}/> }
       <Routes>
-        <Route path="/" element={<Home  products={products} setProducts={setProducts} setSelectedProduct={setSelectedProduct} />} />
+        <Route path="/" element={<Home  products={products} setProducts={setProducts} setSelectedProduct={setSelectedProduct} user={user} token={token}/>} />
         <Route path='/login' element={<Login user={user} setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}></Route>
         <Route path='/register' element={<Register setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} user={user} token={token} setCart={setCart} />}></Route>
         <Route path='/profile' element={<Profile token={token} user={user} isLoggedIn={isLoggedIn} />}></Route>
-        <Route path='/singleproduct' element={<SingleProduct selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct} cart={cart} setCart={setCart} token={token} />}></Route>
+        <Route path='/singleproduct' element={<SingleProduct selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct} cart={cart} setCart={setCart} token={token} user={user} />}></Route>
         <Route path='/cart' element={<Cart cart={cart} token={token} user={user} setCart={setCart} setItems={setItems} items={items}/>}></Route>
         <Route path='/admin' element={<Admin user={user} token={token} setProducts={setProducts} />}></Route>
         <Route path='/checkout' element={<Checkout user={user} token={token} items={items} cart={cart} setCart={setCart}/>}></Route>

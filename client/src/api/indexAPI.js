@@ -132,7 +132,9 @@ export const removeCartItem = async (id) => {
   }
 }
 
-export const deleteProduct = async (token, {id}) => {
+
+export const deleteProduct = async (token, id) => {
+
   try {
     const response = await fetch(`api/products/${id}`, {
       method: "DELETE",
