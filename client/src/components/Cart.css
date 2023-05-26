@@ -1,7 +1,7 @@
 .cart{
     display: flex;
     flex-direction: column;
-    width: 100vw;
+    width: 90vw;
 }
  h2 {
     margin: 5vw;
@@ -38,4 +38,8 @@ display: flex;
     margin-top:20px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     border-radius: 0;
+}
+
+.deleteCartItem {
+    font-size: 10px;
 }

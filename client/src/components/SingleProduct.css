@@ -1,0 +1,24 @@
+
+.single-product-container {
+    display:flex;
+    flex-direction: row;
+    width: 70vw;
+    margin-left: 20vw;
+}
+.close {
+    margin-left: 20vw;
+    margin-bottom: 10px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+.prodImg {
+    width: 300px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
+}
+
+.prodText {
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    padding: 20px;
+}

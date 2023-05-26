@@ -14,20 +14,39 @@ async function addOrderProduct({orderId, productId, quantity, purchasePrice}) {
     }
 }
 
-async function updateOrderProduct({id, quantity, purchasePrice}) {
-    try {
-        const { rows: [order_product] } = await client.query(`
-        UPDATE order_products
-        SET quantity=$2, "purchasePrice"=$3
-        WHERE id=$1
-        RETURNING *
-        `, [id, quantity, purchasePrice]);
-        return order_product;
-    } catch (error) {
-        throw error;
-    }
-}
+// async function updateOrderProduct({id, quantity, purchasePrice}) {
+//     try {
+//         const { rows: [order_product] } = await client.query(`
+//         UPDATE order_products
+//         SET quantity=$2, "purchasePrice"=$3
+//         WHERE id=$1
+//         RETURNING *
+//         `, [id, quantity, purchasePrice]);
+//         return order_product;
+//     } catch (error) {
+//         throw error;
+//     }
+// }
 
+const updateOrderProduct = async ({id, ...fields}) => {
+try {
+  const keys = Object.keys(fields);
+  const setString = keys.map((key, index) => `"${key}"=$${index + 1}`)
+    .join(', ');
+    console.log({setString});
+    console.log(id);
+       const { rows: [ order_product ] } = await client.query(`
+        UPDATE order_products
+        SET ${ setString }
+        WHERE id=${id}
+        RETURNING *;
+       `, Object.values(fields)
+       );
+    return order_product;
+} catch (error) {
+  throw error;
+}
+};
 async function destroyOrderProduct(id) {
     try {
         const {rows: [order_product]} = await client.query(`
