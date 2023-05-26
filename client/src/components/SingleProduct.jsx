@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SingleProduct.css"
-import { addProductToOrder, editProduct } from "../api/indexAPI";
+import { addProductToOrder, editProduct, getSingleProduct } from "../api/indexAPI";
 
 const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
-   const [productName, setProductName] = useState("");
-   const [productDesc, setProductDesc] = useState("");
-   const [productImage, setProductImage] = useState("");
-   const [productPrice, setProductPrice] = useState("");
+   const [productName, setProductName] = useState(selectedProduct.name);
+   const [productDesc, setProductDesc] = useState(selectedProduct.description);
+   const [productImage, setProductImage] = useState(selectedProduct.imageUrl);
+   const [productPrice, setProductPrice] = useState(selectedProduct.price);
    const [productInventory, setProductInventory] = useState(selectedProduct.inventory);
    const navigate = useNavigate();
    console.log("Cart:", cart)
 
+   // useEffect(() => {
+   //    const getProduct = async () => {
+      //   const product = await getSingleProduct(selectedProduct.id);
+   //      console.log(product);
+   //    }
+   //    getProduct();
+   //  }, [])
 
   const addToCart = async (event) => {
     const product = await addProductToOrder(token, cart.id, {productId: selectedProduct.id, quantity: 1, purchasePrice: selectedProduct.price})
@@ -33,16 +40,31 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
              <div>
                 <h2>{selectedProduct.name}</h2>
                 <p>{selectedProduct.description}</p>
-                <img src={selectedProduct.imageUrl}/>
+                <img src={selectedProduct.imageUrl} height="300" width="300"/>
                 <p>{selectedProduct.price}</p>
              </div>
 
-             <form onSubmit={handleEdit}>Edit Product
+             <form className="editForm" onSubmit={handleEdit}>Edit Product
+             <div className="formInput">
+               <label>Product Name</label>
                 <input placeholder="name" value={productName} onChange={(event) => setProductName(event.target.value)}/>
+             </div>
+             <div className="formInput">
+               <label>Description</label>
                 <input placeholder="description" value={productDesc} onChange={(event) => setProductDesc(event.target.value)}/>
+             </div>
+             <div className="formInput">
+               <label>Image URL</label>
                 <input placeholder="imageUrl" value={productImage} onChange={(event) => setProductImage(event.target.value)}/>
+             </div>
+             <div className="formInput">
+               <label>Price</label>
                 <input placeholder="price" value={productPrice} onChange={(event) => setProductPrice(event.target.value)}/>
+             </div>
+             <div className="formInput">
+               <label>Inventory Count</label>
                 <input placeholder="inventory" value={productInventory} type="number" onChange={(event) => setProductInventory(event.target.value)}/>
+             </div>
                 <button type="submit">Submit</button>
             </form>
           

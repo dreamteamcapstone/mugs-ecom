@@ -14,6 +14,7 @@ function App() {
   const [selectedProduct, setSelectedProduct] = useState([]);
   const [cart, setCart] = useState({});
   const [items, setItems] = useState([]);
+  
   useEffect(() => {
     const getData = async () => {
       const fetchedProducts = await fetchAllProducts();

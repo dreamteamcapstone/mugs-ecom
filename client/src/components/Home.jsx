@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createProduct, deleteProduct, fetchAllProducts } from "../api/indexAPI";
 import './Home.css'
+import SingleProduct from "./SingleProduct";
 
 const Home = ( { products, setSelectedProduct, selectedProduct, user, token, setProducts } ) => {
   const [productName, setProductName] = useState("");
