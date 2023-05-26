@@ -30,7 +30,7 @@ const Cart = ({ cart, token, setCart, user, setItems, items }) => {
       console.log(typeof product.purchasePrice);
     //   const updatedProduct = await updateCartItem({id: product.id, quantity: event.target.value, purchasePrice: product.purchasePrice})
     const updatedProduct = await updateCartItem(
-        {id: product.id, quantity: event.target.value, purchasePrice: product.purchasePrice })
+        {id: product.id, quantity: +event.target.value, purchasePrice: product.purchasePrice })
     console.log(updatedProduct);
       if(!updatedProduct.error & updatedProduct.id) {
           const updatedOrderItems = items.filter(item => item.id !== product.id)
