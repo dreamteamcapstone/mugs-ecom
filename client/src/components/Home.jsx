@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createProduct, deleteProduct, fetchAllProducts } from "../api/indexAPI";
 import './Home.css'
-import SingleProduct from "./SingleProduct";
 
 const Home = ( { products, setSelectedProduct, selectedProduct, user, token, setProducts } ) => {
   const [productName, setProductName] = useState("");
@@ -55,6 +54,7 @@ const handleDelete = async (event, {id}) => {
             <div className="product-tile" onClick={() => {
               setSelectedProduct(product)
               navigate('/singleproduct')
+              console.log(selectedProduct);
             }}>
               <img src={product.imageUrl}/>
               <div className="product-name">

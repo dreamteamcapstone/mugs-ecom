@@ -22,7 +22,8 @@ const Login = ({user, setToken, setIsLoggedIn, setUser}) => {
     }
     
     return(
-        <>
+        <div className="loginWindow">
+
         <div className="login">
         <h2>Log In</h2>
         <form onSubmit={handleSubmit} className="loginForm">
@@ -34,9 +35,9 @@ const Login = ({user, setToken, setIsLoggedIn, setUser}) => {
             ></input>
             <button type="submit">Login</button>
         </form>
-        <div>If you don't have an account create one <NavLink to="/register">here</NavLink>.</div>
+        <div className="registerLink">If you don't have an account create one <NavLink to="/register">here</NavLink>.</div>
         </div>
-        </>
+        </div>
     )
 }
 

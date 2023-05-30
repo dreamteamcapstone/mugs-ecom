@@ -22,7 +22,7 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
 
   const addToCart = async (event) => {
     const product = await addProductToOrder(token, cart.id, {productId: selectedProduct.id, quantity: 1, purchasePrice: selectedProduct.price})
-    console.log("Data from addTOCart:", cart.id)
+   //  console.log("Data from addTOCart:", cart.id)
     console.log("Added Product:", product)
     navigate('/cart')
   }
