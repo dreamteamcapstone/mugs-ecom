@@ -138,7 +138,7 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
                 <div className="productInfo">
                 <p className="price">{selectedProduct.price}</p>
                 <p>About this item <br />{selectedProduct.description}</p>
-             <button onClick= { addToCart }>Add to Cart</button>
+                <button onClick= {() =>{ addToCart; navigate("/cart") }}>Add to Cart</button>
                 </div>
                 </div>
              </div>
