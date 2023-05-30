@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {createOrder, getAllOrders, getOrderById, updateOrder, deleteOrder, getAllOrderProductsByOrder, getAllOrdersByUser, addOrderProduct} = require("../db");
+const {createOrder, getAllOrders, getOrderById, updateOrder, deleteOrder, getAllOrderProductsByOrder, getAllOrdersByUser, addOrderProduct, getOrderWithProducts} = require("../db");
 const { requireUser } = require('./utils')
 
 // GET /api/orders
@@ -113,6 +113,16 @@ router.post('/:orderId/products', requireUser, async (req, res, next) => {
     }
   });
 
+router.get('/:id', requireUser, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const order = await getOrderWithProducts(id)
+    console.log(order)
+    res.send(order);
+  } catch (error) {
+    next(error);
+  }
+})
 
 module.exports = router;
 

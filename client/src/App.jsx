@@ -14,9 +14,11 @@ function App() {
   const [selectedProduct, setSelectedProduct] = useState([]);
   const [cart, setCart] = useState({});
   const [items, setItems] = useState([]);
+  
   useEffect(() => {
     const getData = async () => {
       const fetchedProducts = await fetchAllProducts();
+      console.log(fetchedProducts);
       setProducts(fetchedProducts);
       if(token) {
         const me = await getMe(token);
@@ -63,7 +65,7 @@ function App() {
         <Route path='/register' element={<Register setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} user={user} token={token} setCart={setCart} />}></Route>
         <Route path='/profile' element={<Profile token={token} user={user} isLoggedIn={isLoggedIn} />}></Route>
         <Route path='/singleproduct' element={<SingleProduct selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct} cart={cart} setCart={setCart} token={token} user={user} />}></Route>
-        <Route path='/cart' element={<Cart cart={cart} token={token} user={user} setCart={setCart} setItems={setItems} items={items}/>}></Route>
+        <Route path='/cart' element={<Cart cart={cart} token={token} user={user} setCart={setCart} setItems={setItems} items={items} />}></Route>
         <Route path='/admin' element={<Admin user={user} token={token} setProducts={setProducts} />}></Route>
         <Route path='/checkout' element={<Checkout user={user} token={token} items={items} cart={cart} setCart={setCart}/>}></Route>
       </Routes>

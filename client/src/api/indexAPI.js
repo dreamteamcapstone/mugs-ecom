@@ -90,6 +90,21 @@ export const fetchOrderProducts = async (token, orderId) => {
   }
 }
 
+export const fetchProduct = async (productId) => {
+  try {
+    const response = await fetch(`api/products/${productId}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch(error) {
+    console.error(error);
+  }
+}
+
 // export const updateCartItem = async ({id, quantity, purchasePrice}) => {
 //   console.log(quantity);
 //   try {
@@ -104,14 +119,14 @@ export const fetchOrderProducts = async (token, orderId) => {
 //     console.error(error);
 //   }
 // }
-export const updateCartItem = async ({id, quantity, purchasePrice}) => {
+export const updateCartItem = async ({id, quantity, purchasePrice, description, imageUrl, inventory, name, orderId, orderProductId, price}) => {
   try {
     const response = await fetch(`api/order_products/${id}`, {
       method: "PATCH",
       headers: {
         'Content-Type': 'application/json'
       },
-     body: JSON.stringify({quantity, purchasePrice})
+     body: JSON.stringify({id, quantity, purchasePrice, description, imageUrl, inventory, name, orderId, orderProductId, price})
     });
     const result = await response.json();
     console.log(result);
@@ -127,9 +142,11 @@ export const removeCartItem = async (id) => {
     const response = await fetch(`api/order_products/${id}`, {
       method: "DELETE"
     });
-    const result = await response.json();
-    console.log(result);
-    return result;
+    // console.log(response);
+    // const result = response.body.text();
+    // console.log(result)
+    // console.log(result);
+    // return result;
   } catch (error) {
     console.error(error);
   }
@@ -210,3 +227,19 @@ export const editOrder = async (token, {orderId, userId, purchased}) => {
   }
 }
 
+//CAN'T
+export const fetchCart = async (token, id) => {
+  try {
+    const response = await fetch(`api/orders/${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch(error) {
+    console.error(error);
+  }
+}

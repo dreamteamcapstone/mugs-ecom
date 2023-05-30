@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { 
     updateOrderProduct, 
-    destroyOrderProduct
+    destroyOrderProduct,
      } = require('../db');
 
 // router.patch("/:id", async (req, res, next) => {

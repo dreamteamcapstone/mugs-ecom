@@ -4,37 +4,39 @@ import {
   fetchOrderProducts,
   updateCartItem,
   removeCartItem,
+  fetchCart,
 } from "../api/indexAPI";
 import { useNavigate } from 'react-router-dom';
 import "./Cart.css";
-const Cart = ({ cart, token, setCart, user, setItems, items }) => {
+
+const Cart = ({ cart, token, setCart, user, setItems, items}) => {
   const navigate = useNavigate();
+
+  console.log(items)
 
   useEffect(() => {
     const getOrderItems = async () => {
       console.log(cart);
       const orderItems = await fetchOrderProducts(token, cart.id);
+      const cartWithProds = await fetchCart(token, cart.id);
+      console.log(cartWithProds);
+      const prods = cartWithProds[0].products;
+      console.log(prods);
       setItems(orderItems);
+      console.log(items);
       console.log(orderItems);
-    };
+    }
     getOrderItems();
   }, [cart]);
 
   console.log(cart);
-  console.log(items);
+
 
   const handleQuantity = async (event, product) => {
-      console.log(product);
-      console.log(+event.target.value);
-      console.log(product.id);
-      console.log(typeof product.purchasePrice);
-    //   const updatedProduct = await updateCartItem({id: product.id, quantity: event.target.value, purchasePrice: product.purchasePrice})
-    const updatedProduct = await updateCartItem(
-        {id: product.id, quantity: +event.target.value, purchasePrice: product.purchasePrice })
-    console.log(updatedProduct);
-      if(!updatedProduct.error & updatedProduct.id) {
-          const updatedOrderItems = items.filter(item => item.id !== product.id)
-          setItems(updatedOrderItems);
+    const updatedProduct = await updateCartItem({id: +orderProduct.id, quantity: +event.target.value, purchasePrice: orderProduct.purchasePrice})
+        console.log(updatedProduct);
+      if(updatedProduct.id) {
+          setItems(items);
       }
   }
 
@@ -42,35 +44,35 @@ const Cart = ({ cart, token, setCart, user, setItems, items }) => {
     <div className="cart">
       <h2>Your Cart</h2>
       {items &&
-        items.map((product) => {
+        items.map((orderProduct) => {
           return (
-            <div className="product-container" key={product.id}>
+            <div className="product-container" key={orderProduct.id}>
               <ul className="lineItems">
-                <li>{product.productId}</li>
-                <li>
+                <li><img className="icon" src={orderProduct.imageUrl}/></li>
+                <li>{orderProduct.id}</li>
+                <li>Qty:
                   <input className="qty"
-                    onChange={(event) => handleQuantity(event, product)}
+                    onChange={(event) => handleQuantity(event, orderProduct)}
                     type="number"
                     id="quantity"
-                    placeholder={product.quantity}
+                    placeholder={orderProduct.quantity}
                     min="1"
                     max="5"
                   />
-                  Qty:{product.quantity}
                 </li>
-                <li>{product.purchasePrice}</li>
+                <li>{orderProduct.purchasePrice} /mug</li>
                 <li>
                   <button className="deleteCartItem"
                     onClick={async () => {
-                      console.log(product.id);
-                      const deletedItem = await removeCartItem(product.id);
-                      console.log(deletedItem);
+                      console.log(orderProduct.id);
+                      await removeCartItem(orderProduct.id);
                       const userOrders = await fetchUserOrders(user, token);
+                      
                       console.log(userOrders);
                       const openOrder = userOrders.find(
                         (order) => order.purchased === false
                       );
-                      // console.log("hi", userOrders.find(order => order.purchased === false));
+
                       console.log(openOrder);
                       setCart(openOrder);
                     }}

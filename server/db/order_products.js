@@ -48,6 +48,7 @@ try {
 }
 };
 async function destroyOrderProduct(id) {
+  console.log(`deleting order product ${id}`)
     try {
         const {rows: [order_product]} = await client.query(`
         DELETE FROM order_products 
@@ -77,6 +78,7 @@ async function getAllOrderProductsByOrder({ id }) {
       }
 }
 
+
 async function attachOrderProductsToOrder(orders) {
     const ordersToReturn = [...orders]; 
 
@@ -92,6 +94,8 @@ async function attachOrderProductsToOrder(orders) {
     `,
       orderIds
     );
+
+    console.log(products)
   
     for (const order of ordersToReturn) {
       const productsToAdd = products.filter(
@@ -104,10 +108,27 @@ async function attachOrderProductsToOrder(orders) {
     return ordersToReturn;
   }
 
+  const getAllOrderProducts = async () => {
+    try {
+        const { rows: order_products } = await client.query(
+          `
+          Select order_products.*
+          FROM order_products
+          JOIN products ON order_products."productId" = products.id
+          `
+          );
+    
+        return order_products;
+      } catch (error) {
+        throw error;
+      }
+  }
+  
 module.exports = {
     addOrderProduct,
     updateOrderProduct,
     destroyOrderProduct,
     getAllOrderProductsByOrder,
-    attachOrderProductsToOrder
+    attachOrderProductsToOrder,
+    getAllOrderProducts
 };

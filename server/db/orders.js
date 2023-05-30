@@ -52,6 +52,13 @@ const getAllOrdersByUser = async (id) => {
     }
 }
 
+const getOrderWithProducts = async (id) => {
+  let allOrders = await getAllOrders();
+  console.log(typeof id)
+  const orderWithProd = allOrders.filter((order) => order.id === +id);
+  return orderWithProd;
+}
+
 const getAllOrders = async () => {
     try {
         const { rows: orders } = await client.query(
@@ -118,5 +125,6 @@ module.exports = {
     updateOrder,
     deleteOrder,
     getAllOrdersByUser,
-    getAllOrders
+    getAllOrders,
+    getOrderWithProducts
 };

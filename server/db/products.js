@@ -25,6 +25,7 @@ const getAllProducts = async () => {
     }
 }
 
+
 const getProductById = async (id) => {
  try {
     const { rows: [ product ] } = await client.query(`
