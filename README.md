@@ -58,7 +58,7 @@ npm run start:dev
 
 ## Authors:
 
-- Josh Eardley - [](https://github.com/josh-eardley)
-- Courtney Luckett - [](https://github.com/ccluckett)
-- Grant Gilman - [](https://github.com/grantgilman4)
-- Natalia Kielian - [](https://github.com/Natalia1113)
+- Josh Eardley - [:octocat:](https://github.com/josh-eardley)
+- Courtney Luckett - [:octocat:](https://github.com/ccluckett)
+- Grant Gilman - [:octocat:](https://github.com/grantgilman4)
+- Natalia Kielian - [:octocat:](https://github.com/Natalia1113)
