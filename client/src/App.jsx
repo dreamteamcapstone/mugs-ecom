@@ -14,6 +14,7 @@ function App() {
   const [selectedProduct, setSelectedProduct] = useState([]);
   const [cart, setCart] = useState({});
   const [items, setItems] = useState([]);
+  
   useEffect(() => {
     const getData = async () => {
       const fetchedProducts = await fetchAllProducts();
@@ -58,7 +59,7 @@ function App() {
     <div className="App">
       { <Navbar user={user} setUser={setUser} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} setToken={setToken} setCart={setCart}/> }
       <Routes>
-        <Route path="/" element={<Home  products={products} setProducts={setProducts} setSelectedProduct={setSelectedProduct} user={user} token={token}/>} />
+        <Route path="/" element={<Home  products={products} setProducts={setProducts} selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct} user={user} token={token}/>} />
         <Route path='/login' element={<Login user={user} setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}></Route>
         <Route path='/register' element={<Register setToken={setToken} setIsLoggedIn={setIsLoggedIn} setUser={setUser} user={user} token={token} setCart={setCart} />}></Route>
         <Route path='/profile' element={<Profile token={token} user={user} isLoggedIn={isLoggedIn} />}></Route>

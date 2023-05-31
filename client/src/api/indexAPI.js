@@ -210,3 +210,17 @@ export const editOrder = async (token, {orderId, userId, purchased}) => {
   }
 }
 
+export const getSingleProduct = async (productId) => {
+  try {
+    const response = await fetch(`api/products/${productId}`, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    const result = response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
