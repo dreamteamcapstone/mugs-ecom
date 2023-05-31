@@ -4,7 +4,7 @@ const { getAllProducts, createProduct, getProductByName, getProductById, updateP
 
 const { requireUser } = require('./utils')
 
-// Get All Products
+// Get All Products api/products
 router.get('/', async (req, res, next) => {
     try {
        const allProducts = await getAllProducts()
