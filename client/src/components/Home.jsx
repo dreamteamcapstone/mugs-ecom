@@ -54,6 +54,7 @@ const handleDelete = async (event, {id}) => {
             <div className="product-tile" onClick={() => {
               setSelectedProduct(product)
               navigate('/singleproduct')
+              console.log(selectedProduct);
             }}>
               <img src={product.imageUrl}/>
               <div className="product-name">

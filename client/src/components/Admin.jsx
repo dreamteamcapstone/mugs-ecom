@@ -13,20 +13,20 @@ const [productInventory, setProductInventory] = useState(0);
 const handleCreate = async (event) => {
     event.preventDefault();
     const product = await createProduct(token, {name: productName, description: productDesc, imageUrl: productImage, price: productPrice, inventory: productInventory});
-    console.log(product);
+    // console.log(product);
 }
 
 const handleEdit = async (event) => {
     event.preventDefault();
     const product = await editProduct(token, {id: productId, name: productName, description: productDesc, imageUrl: productImage, price: productPrice, inventory: productInventory});
-    console.log(product);
+    // console.log(product);
 }
 
 const handleDelete = async (event) => {
 
     event.preventDefault()
     const product = await deleteProduct(productId, token)
-    console.log("Deleted product:", product);
+    // console.log("Deleted product:", product);
 }
 
     return(

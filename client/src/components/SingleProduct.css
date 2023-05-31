@@ -32,4 +32,14 @@
 .button {
     color: black;
     font-size: 1em;
+
+.editForm {
+    display: flex;
+}
+
+.formInput {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    
 }

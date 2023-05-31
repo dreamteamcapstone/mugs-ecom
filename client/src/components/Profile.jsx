@@ -7,8 +7,8 @@ const Profile = ({isLoggedIn, user, token}) => {
     useEffect(() => {
         const getOrderHistory = async () => {
             const allUserOrders = await fetchUserOrders(user, token);
-            setUserOrders(allUserOrders);
-            console.log(allUserOrders)
+            const orderHistory = allUserOrders.filter(order => order.purchased === true);
+            setUserOrders(orderHistory);
         };
         getOrderHistory();
     }, [])

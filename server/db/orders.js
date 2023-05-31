@@ -68,8 +68,6 @@ const getAllOrders = async () => {
       }
 }
 
-
-
 const updateOrder = async ({id, ...fields}) => {
     const setString = Object.keys(fields).map(
         (key, index) => `"${ key }"=$${ index + 1 }`

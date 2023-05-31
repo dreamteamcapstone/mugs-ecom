@@ -3,22 +3,9 @@ const router = express.Router();
 
 const { 
     updateOrderProduct, 
-    destroyOrderProduct
+    destroyOrderProduct,
      } = require('../db');
 
-// router.patch("/:id", async (req, res, next) => {
-//     try {
-//         const {id} = req.params;
-//         const {quantity, purchasePrice} = req.body;
-//         console.log(req.body)
-//         console.log(typeof +id);
-//         console.log(typeof quantity)
-//         const orderProduct = await updateOrderProduct({id, quantity, purchasePrice});
-//         res.send(orderProduct);
-//     } catch (error) {
-//         next(error);
-//     }
-// });
 
 router.patch('/:id', async (req, res, next) => {
     const { id } = req.params;
