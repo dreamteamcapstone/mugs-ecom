@@ -164,12 +164,16 @@ const createInitialOrderProducts = async () => {
       productId: reactMug.id,
       quantity: 1,
       purchasePrice: reactMug.price,
+      productName: reactMug.name,
+      productImg: reactMug.imageUrl
     },
     {
       orderId: order1.id,
       productId: floralMug.id,
       quantity: 1,
       purchasePrice: floralMug.price,
+      productName: floralMug.name,
+      productImg: floralMug.imageUrl
     },
     {
       orderId: order2.id,
@@ -209,9 +213,6 @@ const rebuildDB = async () => {
     await createInitialProducts();
     await createInitialOrders();
     await createInitialOrderProducts();
-    console.log("this is checking getAllOrders---->", await getAllOrders())
-    console.log("this is checking getAllOrderByUser---->", await getAllOrdersByUser('hello@gmail.com'))
-    console.log('getUser ---->', await getUser({email: "hello@gmail.com", password: "123456"}))
   } catch (error) {
     console.error('Error during rebuildDB', error);
     throw error;

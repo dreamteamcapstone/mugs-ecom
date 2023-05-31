@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {createOrder, getAllOrders, getOrderById, updateOrder, deleteOrder, getAllOrderProductsByOrder, getAllOrdersByUser, addOrderProduct, getOrderWithProducts} = require("../db");
+const {createOrder, getAllOrders, getOrderById, updateOrder, deleteOrder, getAllOrderProductsByOrder, addOrderProduct} = require("../db");
 const { requireUser } = require('./utils')
 
 // GET /api/orders
@@ -75,13 +75,6 @@ router.post('/:orderId/products', requireUser, async (req, res, next) => {
         const orderProducts = await getAllOrderProductsByOrder(orderId);
         const product = orderProducts.find(orderProduct => orderProduct.productId === productId)
             if (product) {
-                // const updatedQuantity = quantity + product.quantity;
-                // console.log(updatedQuantity);
-                // // const updatedPurchasePrice = Number(product.purchasePrice) * updatedQuantity;
-                // // console.log(updatedPurchasePrice)
-                // const updatedOrderItem = await updateOrderProduct({productId, updatedQuantity, purchasePrice})
-                // console.log(updatedOrderItem)
-                // res.send(updatedOrderItem);
                 next({
                   name: "Order Product already exists in Order",
                   message: "Order Product quantity will need to be updated from cart"
@@ -112,17 +105,6 @@ router.post('/:orderId/products', requireUser, async (req, res, next) => {
       next(error);
     }
   });
-
-router.get('/:id', requireUser, async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const order = await getOrderWithProducts(id)
-    console.log(order)
-    res.send(order);
-  } catch (error) {
-    next(error);
-  }
-})
 
 module.exports = router;
 

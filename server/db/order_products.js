@@ -1,5 +1,5 @@
 const client = require('./client');
-
+//CHANGES
 async function addOrderProduct({orderId, productId, quantity, purchasePrice}) {
     try {
         const { rows: [order_product] } =await client.query(`
@@ -33,8 +33,6 @@ try {
   const keys = Object.keys(fields);
   const setString = keys.map((key, index) => `"${key}"=$${index + 1}`)
     .join(', ');
-    console.log({setString});
-    console.log(id);
        const { rows: [ order_product ] } = await client.query(`
         UPDATE order_products
         SET ${ setString }
@@ -48,7 +46,6 @@ try {
 }
 };
 async function destroyOrderProduct(id) {
-  console.log(`deleting order product ${id}`)
     try {
         const {rows: [order_product]} = await client.query(`
         DELETE FROM order_products 
@@ -94,8 +91,6 @@ async function attachOrderProductsToOrder(orders) {
     `,
       orderIds
     );
-
-    console.log(products)
   
     for (const order of ordersToReturn) {
       const productsToAdd = products.filter(
