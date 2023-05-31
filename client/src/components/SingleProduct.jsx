@@ -32,22 +32,12 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
   if(user.admin){
    if(selectedProduct.inventory > 0){    
       return (
-         <>
-             <div>
-               {/* QUESTION: do we need these buttons that navigate to home if the home button in navbar already does that? */}
-                  <button onClick={() => {
-                  navigate('/')
-                  }}>Back</button>
-                <h2>{selectedProduct.name}</h2>
-                <div className="productView">
-                <img src={selectedProduct.imageUrl} height="500" width="500"/>
-                <div className="productInfo">
-                <p className="price">{selectedProduct.price}</p>
-                <p>About this item <br />{selectedProduct.description}</p>
-                <button onClick= {() =>{ addToCart; navigate("/cart") }}>Add to Cart</button>
-                </div>
-                </div>
-             </div>
+          <>
+             <div className="container">
+                <h2 className="name">{selectedProduct.name}</h2>
+                <img className="prodImg" src={selectedProduct.imageUrl}/>
+                <p>{selectedProduct.description}</p>
+                <p>{selectedProduct.price}</p>
 
              <form className="editForm" onSubmit={handleEdit}>Edit Product
              <div className="formInput">
@@ -73,27 +63,25 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
                 <button type="submit">Submit</button>
             </form>
           
-
           </>
       )
   } else {
      return (
-         <>
+       <>
+         <div className="container">
             <div>
-                  <button onClick={() => {
-                  navigate('/')
-                  }}>Back</button>
-                <h2>{selectedProduct.name}</h2>
-                <div className="productView">
-                <img src={selectedProduct.imageUrl} height="500" width="500"/>
-                <div className="productInfo">
-                <p className="price">{selectedProduct.price}</p>
-                <p>About this item <br />{selectedProduct.description}</p>
-             <button>Out of Stock</button>
-                </div>
-                </div>
-             </div>
-
+               <h1 className="name">{selectedProduct.name}</h1>
+               <img className="prodImg" src={selectedProduct.imageUrl}/>
+               <p className="description">{selectedProduct.description}</p>
+               <p className="price">{selectedProduct.price}</p>
+               
+            </div>
+         
+            <button className="button" >Out Of Stock</button>
+            <button className="button" onClick={() => {
+             navigate('/')
+             }}>X</button>
+         </div>
              <form className="editForm" onSubmit={handleEdit}>Edit Product
              <div className="formInput">
                <label>Product Name</label>
@@ -123,41 +111,37 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
   } else{
    if(selectedProduct.inventory > 0){        
       return (
-          <>
-             <div>
-                  <button onClick={() => {
-                  navigate('/')
-                  }}>Back</button>
-                <h2>{selectedProduct.name}</h2>
-                <div className="productView">
-                <img src={selectedProduct.imageUrl} height="500" width="500"/>
-                <div className="productInfo">
+          <div className="container">
+             <div className="container">
+                <h2 className="name">{selectedProduct.name}</h2>
+                <img className="prodImg" src={selectedProduct.imageUrl}/>
+                <p className="description">{selectedProduct.description}</p>
                 <p className="price">{selectedProduct.price}</p>
-                <p>About this item <br />{selectedProduct.description}</p>
-                <button onClick= {() =>{ addToCart; navigate("/cart") }}>Add to Cart</button>
-                </div>
-                </div>
              </div>
-          </>
+          
+             <button className="button" onClick= { addToCart }>Add to Cart</button>
+
+             <button className="button" onClick={() => {
+             navigate('/')
+             }}>X</button>
+          </div>
       )
   } else {
      return (
-         <>
-            <div>
-                  <button onClick={() => {
-                  navigate('/')
-                  }}>Back</button>
-                <h2>{selectedProduct.name}</h2>
-                <div className="productView">
-                <img src={selectedProduct.imageUrl} height="500" width="500"/>
-                <div className="productInfo">
-                <p className="price">{selectedProduct.price}</p>
-                <p>About this item <br />{selectedProduct.description}</p>
-             <button>Out of Stock</button>
-                </div>
-                </div>
-             </div>
-         </>
+         <div className="container">
+            <div className="container">
+               <h1 className="name">{selectedProduct.name}</h1>
+               <img className="prodImg" src={selectedProduct.imageUrl}/>
+               <p className="description">{selectedProduct.description}</p>
+               <p className="price">{selectedProduct.price}</p>
+               
+            </div>
+         
+            <button className="button">Out Of Stock</button>
+            <button className="button" onClick={() => {
+             navigate('/')
+             }}>X</button>
+         </div>
      )
   }
   }

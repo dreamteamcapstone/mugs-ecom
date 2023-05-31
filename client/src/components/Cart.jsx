@@ -31,6 +31,7 @@ const Cart = ({ cart, token, setCart, user, setItems, items, products}) => {
     return num;
   }
 
+
   const handleQuantity = async (event, orderProduct) => {
     const updatedProduct = await updateCartItem({id: +orderProduct.id, quantity: +event.target.value, purchasePrice: orderProduct.purchasePrice})
       if(updatedProduct.id) {
