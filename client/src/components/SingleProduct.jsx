@@ -10,7 +10,6 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
    const [productPrice, setProductPrice] = useState(selectedProduct.price);
    const [productInventory, setProductInventory] = useState(selectedProduct.inventory);
    const navigate = useNavigate();
-   console.log("Cart:", cart)
 
    // useEffect(() => {
    //    const getProduct = async () => {
@@ -22,15 +21,12 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
 
   const addToCart = async (event) => {
     const product = await addProductToOrder(token, cart.id, {productId: selectedProduct.id, quantity: 1, purchasePrice: selectedProduct.price})
-   //  console.log("Data from addTOCart:", cart.id)
-    console.log("Added Product:", product)
     navigate('/cart')
   }
 
   const handleEdit = async (event) => {
    event.preventDefault()
    const updatedProduct = await editProduct(token, {id: selectedProduct.id, name: productName, description: productDesc, imageUrl: productImage, price: productPrice, inventory: productInventory})
-   console.log("Updated Product:", updatedProduct)
 }
 // QUESTION: if not logged in don't let people see the add to cart button, maybe instead have the button say "login to make purchases"
   if(user.admin){

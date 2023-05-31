@@ -9,3 +9,4 @@ export { default as SingleProduct } from "./SingleProduct";
 export { default as Cart } from "./Cart";
 export { default as Admin } from "./Admin";
 export { default as Checkout } from "./Checkout";
+export { default as OrderPlaced} from "./OrderPlaced"
