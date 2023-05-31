@@ -30,10 +30,10 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
    if(selectedProduct.inventory > 0){    
       return (
           <>
-             <div>
-                <h2>{selectedProduct.name}</h2>
+             <div className="container">
+                <h2 className="name">{selectedProduct.name}</h2>
+                <img className="prodImg" src={selectedProduct.imageUrl}/>
                 <p>{selectedProduct.description}</p>
-                <img src={selectedProduct.imageUrl}/>
                 <p>{selectedProduct.price}</p>
              </div>
 
@@ -55,56 +55,56 @@ const SingleProduct = ({ selectedProduct, token , cart, setCart, user}) => {
       )
   } else {
      return (
-         <>
+         <div className="container">
             <div>
-               <h1>{selectedProduct.name}</h1>
-               <p>{selectedProduct.description}</p>
-               <img src={selectedProduct.imageUrl}/>
-               <p>{selectedProduct.price}</p>
+               <h1 className="name">{selectedProduct.name}</h1>
+               <img className="prodImg" src={selectedProduct.imageUrl}/>
+               <p className="description">{selectedProduct.description}</p>
+               <p className="price">{selectedProduct.price}</p>
                
             </div>
          
-            <button>Out Of Stock</button>
-            <button onClick={() => {
+            <button className="button" >Out Of Stock</button>
+            <button className="button" onClick={() => {
              navigate('/')
              }}>X</button>
-         </>
+         </div>
      )
   }
   } else{
    if(selectedProduct.inventory > 0){        
       return (
-          <>
-             <div>
-                <h2>{selectedProduct.name}</h2>
-                <p>{selectedProduct.description}</p>
-                <img src={selectedProduct.imageUrl}/>
-                <p>{selectedProduct.price}</p>
+          <div className="container">
+             <div className="container">
+                <h2 className="name">{selectedProduct.name}</h2>
+                <img className="prodImg" src={selectedProduct.imageUrl}/>
+                <p className="description">{selectedProduct.description}</p>
+                <p className="price">{selectedProduct.price}</p>
              </div>
           
-             <button onClick= { addToCart }>Add to Cart</button>
+             <button className="button" onClick= { addToCart }>Add to Cart</button>
 
-             <button onClick={() => {
+             <button className="button" onClick={() => {
              navigate('/')
              }}>X</button>
-          </>
+          </div>
       )
   } else {
      return (
-         <>
-            <div>
-               <h1>{selectedProduct.name}</h1>
-               <p>{selectedProduct.description}</p>
-               <img src={selectedProduct.imageUrl}/>
-               <p>{selectedProduct.price}</p>
+         <div className="container">
+            <div className="container">
+               <h1 className="name">{selectedProduct.name}</h1>
+               <img className="prodImg" src={selectedProduct.imageUrl}/>
+               <p className="description">{selectedProduct.description}</p>
+               <p className="price">{selectedProduct.price}</p>
                
             </div>
          
-            <button>Out Of Stock</button>
-            <button onClick={() => {
+            <button className="button">Out Of Stock</button>
+            <button className="button" onClick={() => {
              navigate('/')
              }}>X</button>
-         </>
+         </div>
      )
   }
   }
