@@ -3,7 +3,7 @@
 ## A fully functioning mock e-commerce application centered around selling coffee vessels utilizing the PERN stack
 [Click here for the live version](https://mugs-ecom.fly.dev/)
 
-![](https://im2.ezgif.com/tmp/ezgif-2-b07276923d.gif)
+![](https://im4.ezgif.com/tmp/ezgif-4-135688ba82.gif)
 
 ## Technologies
 - HTML5
